@@ -80,6 +80,19 @@ git push origin nama-branch
 # Pastikan di branch yang sesuai
 # jangan langsung ke branch main
 ```
+**Contoh output**
+```sh
+noxius@Eridanus:~/Documents/Project/kumo-helpdesk$ git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 1.23 KiB | 420.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:Noxius18/kumo-helpdesk.git
+   15d2c61..85af795  main -> main
+```
 
 ### Untuk check status git apakah ada di staging, siap push dan lain lain
 ```sh
