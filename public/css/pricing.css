@@ -1,0 +1,140 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #2c3e50;
+    padding: 10px 0;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav a.logo {
+    color: #fff;
+    font-size: 1.8em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+header nav ul li {
+    display: inline;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.hero {
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    padding: 80px 0;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.pricing-plans {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.pricing-plans h2 {
+    margin-bottom: 40px;
+    font-size: 2.2em;
+}
+
+.pricing-box {
+    display: inline-block;
+    width: 30%;
+    padding: 20px;
+    margin: 10px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    vertical-align: top;
+    text-align: left;
+}
+
+.pricing-box h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.pricing-box p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.pricing-box ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.pricing-box ul li {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.pricing-box .price {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.pricing-box .cta-btn {
+    background-color: #2980b9;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.pricing-box .cta-btn:hover {
+    background-color: #1a6691;
+}
+
+footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer p {
+    margin: 0;
+}
