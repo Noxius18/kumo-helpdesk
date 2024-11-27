@@ -74,7 +74,7 @@ jobs:
     - name: Migrate Database
       env: 
         DB_CONNECTION: mysql
-        DB_HOST: mariadb
+        DB_HOST: 127.0.0.1
         DB_PORT: 3306
         DB_DATABASE: helpdesk_ci
         DB_USERNAME: root
@@ -84,7 +84,7 @@ jobs:
     - name: Seeding Database
       env: 
         DB_CONNECTION: mysql
-        DB_HOST: mariadb
+        DB_HOST: 127.0.0.1
         DB_PORT: 3306
         DB_DATABASE: helpdesk_ci
         DB_USERNAME: root
@@ -97,7 +97,7 @@ jobs:
     - name: Run Laravel Tests
       env: 
         DB_CONNECTION: mysql
-        DB_HOST: mariadb
+        DB_HOST: 127.0.0.1
         DB_PORT: 3306
         DB_DATABASE: helpdesk_ci
         DB_USERNAME: root
