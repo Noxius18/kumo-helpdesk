@@ -1,26 +1,35 @@
+![Kumo Helpdesk Logo](public/images/logo/logo1.png)
+
+---
 # 📘 Repository Guideline
 ---
 
 ## 📜 Daftar Isi
-1. [Pendahuluan](#pendahuluan)
-2. [Clone Repository](#clone-repository)
-   - [1. Menggunakan SSH](#1-menggunakan-ssh)
-   - [2. Menggunakan HTTPS](#2-menggunakan-https)
-3. [Instalasi Project Laravel](#instalasi-project-laravel)
-   - [1. Install Dependencies](#1-install-dependencies)
-   - [2. Generate Application Key](#2-generate-application-key)
-   - [3. Konfigurasi file `.env`](#3-konfigurasi-file-env)
-     - [3.1 Linux](#31-linux)
-     - [3.2 Windows](#32-windows)
-       - [Powershell](#powershell)
-       - [CMD](#cmd)
-   - [4. Migrasi](#4-migrasi)
-4. [Branching dan Commit Git Guidelines](#branching-dan-commit-git-guidelines)
-   - [1. Branching](#1-branching)
-     - [1.1 Buat Branch Baru](#11-buat-branch-baru)
-   - [2. Commit Message](#2-commit-message)
-   - [3. Push Code](#3-push-code)
-     - [3.1 Pull Branch (Opsional)](#31-pull-branch-opsional)
+- [📖 Pendahuluan](#-pendahuluan)
+- [💻 Cara Install Node.js di Laragon](#-cara-install-nodejs-di-laragon)
+  - [1. Buka Laragon](#1-buka-laragon)
+  - [2. Cek Apakah Node.js Sudah Terinstal](#2-cek-apakah-nodejs-sudah-terinstal)
+- [🛠️ Clone Repository](#-clone-repository)
+  - [1. Menggunakan SSH](#1-menggunakan-ssh)
+  - [2. Menggunakan HTTPS](#2-menggunakan-https)
+- [🧩 Instalasi Project Laravel](#-instalasi-project-laravel)
+  - [1. Install Dependencies](#1-install-dependencies)
+    - [1.1 Composer](#11-composer)
+    - [1.2 JS Depedencies (untuk tailwind)](#12-js-depedencies-untuk-tailwind)
+  - [2. Generate Application Key](#2-generate-application-key)
+  - [3. Konfigurasi file .env](#3-konfigurasi-file-env)
+    - [3.1 Linux](#31-linux)
+    - [3.2 Windows](#32-windows)
+      - [Powershell](#powershell)
+      - [CMD](#cmd)
+  - [4. Migrasi](#4-migrasi)
+  - [5. Serve Project](#5-serve-project)
+- [🚀 Branching dan Commit git guidelines](#-branching-dan-commit-git-guidelines)
+  - [1. Branching](#1-branching)
+    - [1.1 Buat branch baru](#11-buat-branch-baru)
+  - [2. Commit Message](#2-commit-message)
+  - [3. Push code](#3-push-code)
+    - [3.1 Pull branch (opsional)](#31-pull-branch-opsional)
 ---
 ## 📖 Pendahuluan
 Selamat datang di repository project Laravel ini! Ikuti langkah-langkah berikut untuk mempersiapkan environment pengembangan lokal kalian. 
@@ -29,8 +38,26 @@ Selamat datang di repository project Laravel ini! Ikuti langkah-langkah berikut 
 - **Git**
 - **Composer**
 - **PHP** (yang kompatibel dengan Laravel)
+- **Node JS**
 ---
 
+## 💻 Cara Install Node.js di Laragon
+
+Berikut adalah langkah-langkah untuk menginstal **Node.js** di **Laragon**.
+
+### 1. Buka Laragon
+Pastikan Laragon sudah terinstal dan berjalan di komputer kalian. Jika belum, kalian bisa mengunduhnya dari [situs resmi Laragon](https://laragon.org/download/).
+
+### 2. Cek Apakah Node.js Sudah Terinstal
+Sebelum menginstal Node.js, periksa apakah Node.js sudah terinstal di Laragon dengan cara berikut:
+
+- Klik kanan pada ikon **Laragon** di system tray (pojok kanan bawah layar).
+- Pilih **"Terminal"** untuk membuka terminal Laragon.
+- Ketik perintah berikut di terminal:
+  ```bash
+  node -v
+  ```
+---
 ## 🛠️ Clone Repository
 Kalian bisa memilih untuk meng-clone repository ini menggunakan **SSH** atau **HTTPS**.
 
@@ -48,8 +75,14 @@ git clone https://github.com/Noxius18/kumo-helpdesk.git
 Setelah berhasil di clone, kalian bisa ikuti langkah ini terlebih dahulu sebelum mengerjakan projectnya
 
 ### 1. Install Dependencies
+#### 1.1 Composer
 ``` bash
 composer install
+```
+
+#### 1.2 JS Depedencies (untuk tailwind)
+``` bash
+npm install
 ```
 
 ### 2. Generate Application Key
@@ -76,6 +109,12 @@ copy .env-example .env
 ```bash
 php artisan migrate
 ```
+
+### 5. Serve Project
+```bash
+npm run serve
+```
+> Catatan: Aplikasi akan berjalan di localhost pada port **2500**. Kalian dapat mengaksesnya dengan membuka browser dan memasukkan URL http://localhost:2500.
 ---
 ## 🚀 Branching dan Commit git guidelines
 ### 1. Branching
