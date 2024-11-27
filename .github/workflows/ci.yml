@@ -15,7 +15,7 @@ jobs:
         image: mariadb:10.11.10-jammy
         env:
           MARIADB_DATABASE: helpdesk_ci
-          MARIADB_ROOT_PASSWORD: ""
+          MARIADB_ROOT_PASSWORD: ci_test
         ports:
           - 3306:3306
         options: >-
@@ -92,5 +92,5 @@ jobs:
         DB_PORT: 3306
         DB_DATABASE: helpdesk_ci
         DB_USERNAME: root
-        DB_PASSWORD: ""
+        DB_PASSWORD: ci_test
       run: php artisan test
