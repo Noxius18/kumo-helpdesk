@@ -15,7 +15,7 @@ jobs:
         image: mariadb:10.11.10-jammy
         env:
           MARIADB_DATABASE: helpdesk_ci
-          MARIADB_ROOT_PASSWORD: "helpdesk_ci"
+          MARIADB_ROOT_PASSWORD: ""
         ports:
           - 3306:3306
         options: >-
@@ -29,7 +29,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.1'
+        php-version: '8.2'
 
     # 2. Cache Composer Dependencies
     - name: Cache Composer Dependencies
@@ -92,5 +92,5 @@ jobs:
         DB_PORT: 3306
         DB_DATABASE: helpdesk_ci
         DB_USERNAME: root
-        DB_PASSWORD: "helpdesk_ci"
+        DB_PASSWORD: ""
       run: php artisan test

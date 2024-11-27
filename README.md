@@ -39,7 +39,7 @@ Selamat datang di repository project Laravel ini! Ikuti langkah-langkah berikut 
 ✅ **Pastikan kalian sudah memiliki:**
 - **Git**
 - **Composer**
-- **PHP** (yang kompatibel dengan Laravel)
+- **PHP** (Project ini menggunakan PHP 8.3, jadi lebih baik menggunakan PHP 8.2 keatas)
 - **Node JS**
 ---
 
