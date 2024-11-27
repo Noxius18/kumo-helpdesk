@@ -10,28 +10,12 @@ jobs:
   laravel-tests:
     runs-on: ubuntu-latest
 
-    services:
-      mariadb:
-        image: mariadb:10.11.10-jammy
-        env:
-          MARIADB_DATABASE: laravel
-          MARIADB_ROOT_PASSWORD: password
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping -h localhost"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-
     steps:
-    # 1. Setup PHP
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
 
-    # 2. Cache Composer Dependencies
     - name: Cache Composer Dependencies
       uses: actions/cache@v3
       with:
@@ -40,7 +24,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-composer-
 
-    # 3. Cache Node Modules
     - name: Cache Node Modules
       uses: actions/cache@v3
       with:
@@ -49,22 +32,18 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
 
-    # 4. Checkout Repository
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    # 5. Copy .env File
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-    # 6. Install Dependencies (Composer & NPM in Parallel)
-    - name: Install Dependencies (Composer & NPM)
-      run: |
-        composer install --no-progress --prefer-dist --no-interaction
-        npm install
-        wait
+    - name: Install Composer Dependencies
+      run: composer install --no-progress --prefer-dist --no-interaction
 
-    # 7. Cek Direktori Vendor
+    - name: Install NPM Dependencies
+      run: npm install
+
     - name: Check if the Vendor Directory exist
       run: |
         if [ ! -d "vendor" ]; then
@@ -72,33 +51,27 @@ jobs:
             exit 1
         fi
 
-    # 8. Generate Application Key
     - name: Generate Application Key
       run: php artisan key:generate
 
-    # 9. Set Directory Permissions
     - name: Set Directory Permissions
       run: chmod -R 755 storage bootstrap/cache
-    
-    # 10. Migrate Database
+
     - name: Migrate Database
       run: php artisan migrate --force
 
-    # 11. Seed Database
     - name: Seeding Database
-      run: pho artisan db:seed --force
+      run: php artisan db:seed --force
 
-    # 10. Build Front-End Assets
     - name: Build Front-End Assets
       run: npm run build
 
-    # 11. Run Laravel Tests
     - name: Run Laravel Tests
       env:
         DB_CONNECTION: mysql
-        DB_HOST: 127.0.0.1
-        DB_PORT: 3306
-        DB_DATABASE: helpdesk_ci
-        DB_USERNAME: root
-        DB_PASSWORD: password
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_PORT: ${{ secrets.DB_PORT }}
+        DB_DATABASE: ${{ secrets.DB_DATABASE }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       run: php artisan test
