@@ -12,7 +12,7 @@ jobs:
 
     services:
       mysql:
-        image: mariadb:latest
+        image: mariadb:10.11.10-jammy
         env:
           MARIADB_DATABASE: helpdesk_ci
           MARIADB_ROOT_PASSWORD: "helpdesk_ci"
