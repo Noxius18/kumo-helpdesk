@@ -9,6 +9,8 @@
 - [💻 Cara Install Node.js di Laragon](#-cara-install-nodejs-di-laragon)
   - [1. Buka Laragon](#1-buka-laragon)
   - [2. Cek Apakah Node.js Sudah Terinstal](#2-cek-apakah-nodejs-sudah-terinstal)
+  - [3. Install Node.js](#3-install-nodejs)
+  - [4. Verifikasi Node.js](#4-verifikasi-nodejs)
 - [🛠️ Clone Repository](#-clone-repository)
   - [1. Menggunakan SSH](#1-menggunakan-ssh)
   - [2. Menggunakan HTTPS](#2-menggunakan-https)
@@ -57,6 +59,16 @@ Sebelum menginstal Node.js, periksa apakah Node.js sudah terinstal di Laragon de
   ```bash
   node -v
   ```
+
+### 3. Install Node.js
+- Klik kanan pada ikon **Laragon** di system tray, lalu pilih **Tools** > **Quick Add** > **Node.js**
+
+### 4. Verifikasi Node.js
+```bash
+node -v # Output Versi Node.js
+npm -v # Output Versi NPM
+```
+
 ---
 ## 🛠️ Clone Repository
 Kalian bisa memilih untuk meng-clone repository ini menggunakan **SSH** atau **HTTPS**.
