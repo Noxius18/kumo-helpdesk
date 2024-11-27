@@ -96,7 +96,7 @@ Pastikan untuk membuat pesan commit mengikuti format seperti ini
 
 **Contoh** 
 ```bash
-git comiit -m "feat: Tambah fitur menghapus tiket"
+git commit -m "feat: Tambah fitur menghapus tiket"
 ```
 
 ### 3. Push code
