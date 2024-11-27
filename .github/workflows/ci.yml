@@ -60,23 +60,31 @@ jobs:
     # 6. Install Dependencies (Composer & NPM in Parallel)
     - name: Install Dependencies (Composer & NPM)
       run: |
-        npm install &
-        composer install --no-progress --prefer-dist --no-interaction &
+        composer install --no-progress --prefer-dist --no-interaction
+        npm install
         wait
 
-    # 7. Generate Application Key
+    # 7. Cek Direktori Vendor
+    - name: Check if the Vendor Directory exist
+      run: |
+        if [ ! -d "vendor" ]; then
+            echo "Direktori Vendor belum tersedia!"
+            exit 1
+        fi
+
+    # 8. Generate Application Key
     - name: Generate Application Key
       run: php artisan key:generate
 
-    # 8. Set Directory Permissions
+    # 9. Set Directory Permissions
     - name: Set Directory Permissions
       run: chmod -R 755 storage bootstrap/cache
 
-    # 9. Build Front-End Assets
+    # 10. Build Front-End Assets
     - name: Build Front-End Assets
       run: npm run build
 
-    # 10. Run Laravel Tests
+    # 11. Run Laravel Tests
     - name: Run Laravel Tests
       env:
         DB_CONNECTION: mysql
