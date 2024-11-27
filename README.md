@@ -1,4 +1,4 @@
-![Kumo Helpdesk Logo](public/images/logo/logo1.png)
+![Kumo Helpdesk Logo](https://drive.google.com/uc?id=1GBhXAG4FskccCpPioFF6U6DoQN3TUcVt)
 
 ---
 # 📘 Repository Guideline
