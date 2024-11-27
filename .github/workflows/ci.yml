@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      mysql:
+      mariadb:
         image: mariadb:10.11.10-jammy
         env:
-          MARIADB_DATABASE: helpdesk_ci
-          MARIADB_ROOT_PASSWORD: "ci_test"
+          MARIADB_DATABASE: laravel
+          MARIADB_ROOT_PASSWORD: password
         ports:
           - 3306:3306
         options: >-
@@ -96,9 +96,9 @@ jobs:
     - name: Run Laravel Tests
       env:
         DB_CONNECTION: mysql
-        DB_HOST: localhost
+        DB_HOST: 127.0.0.1
         DB_PORT: 3306
         DB_DATABASE: helpdesk_ci
         DB_USERNAME: root
-        DB_PASSWORD: "ci_test"
+        DB_PASSWORD: password
       run: php artisan test
