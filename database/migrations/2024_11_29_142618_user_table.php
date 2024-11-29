@@ -17,18 +17,15 @@ return new class extends Migration
             $table->string('nama_belakang', 25);
             $table->string('email', 50)->unique();
             $table->string('password', 100);
+            $table->char('spesialis_id', 5)->nullable();            
+            $table->char('roles_id', 5);
+            $table->char('departemen_id', 5);
 
-            // Tabel Spesialis
-            $table->string('spesialis', 5)->nullable();
-            $table->foreign('spesialis')->references('spesialis_id')->on('spesialisasi');
-            
-            // Tabel Roles
-            $table->string('role', 5);
-            $table->foreign('role')->references('roles_id')->on('roles');
-            
-            // Tabel Departemem
-            $table->string('departemen', 5);
-            $table->foreign('departemen')->references('departemen_id')->on('departemen');
+            // Foreign Key
+            $table->foreign('spesialis_id')->references('spesialis_id')->on('spesialisasi');
+            $table->foreign('roles_id')->references('roles_id')->on('roles');
+            $table->foreign('departemen_id')->references('departemen_id')->on('departemen');
+        
         });
     }
 
