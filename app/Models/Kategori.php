@@ -10,7 +10,7 @@ class Kategori extends Model
 {
     protected $table = 'kategori';
     protected $primaryKey = 'kategori_id';
-    protected $keyType = 'char';
+    protected $keyType = 'string';
     public $timestamps = false;
     protected $fillable = [
         'kategori_id',
