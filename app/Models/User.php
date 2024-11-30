@@ -2,44 +2,58 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+use App\Models\Role;
+use App\Models\Departemen;
+use App\Models\Spesialis;
+use App\Models\Tiket;
+use App\Models\Note;
+class User extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $table = 'user';
+    protected $primaryKey = 'user_id';
+    protected $keyType = 'string';
+    public $timestamps = false;
     protected $fillable = [
-        'name',
+        'user_id',
+        'nama_depan',
+        'nama_belakang',
         'email',
         'password',
+        'spesialis_id',
+        'role_id',
+        'departemen_id'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
-        'remember_token',
+        'remember_token'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function spesialis() {
+        return $this->belongsTo(Spesialis::class, 'spesialis_id');
+    }
+
+    public function role() {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function departemen() {
+        return $this->belongsTo(Departemen::class, 'departemen_id');
+    }
+
+    public function tiket() {
+        return $this->hasMany(Tiket::class, 'tiket_id');
+    }
+
+    public function note() {
+        return $this->hasMany(Note::class, 'note_id');
+    }
+
 }
