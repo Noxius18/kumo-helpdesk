@@ -11,7 +11,7 @@ class Note extends Model
 {
     protected $table = 'tiket_note';
     protected $primaryKey = 'note_id';
-    protected $keyType = 'char';
+    protected $keyType = 'string';
     public $timestamps = false;
     protected $fillable = [
         'note_id',

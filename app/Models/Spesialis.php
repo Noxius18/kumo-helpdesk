@@ -10,7 +10,7 @@ class Spesialis extends Model
 {
     protected $table = 'spesialisasi';
     protected $primaryKey = 'spesialis_id';
-    protected $keyType = 'char';
+    protected $keyType = 'string';
     public $timestamps = false;
     protected $fillable = [
         'spesialis_id',

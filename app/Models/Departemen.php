@@ -10,7 +10,7 @@ class Departemen extends Model
 {
     protected $table = 'departemen';
     protected $primaryKey = 'departemen_id';
-    protected $keyType = 'char';
+    protected $keyType = 'string';
     public $timestamps = false;
     protected $fillable = [
         'departemen_id',
