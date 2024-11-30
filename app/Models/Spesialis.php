@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\User;
+
 class Spesialis extends Model
 {
     protected $table = 'spesialisasi';
@@ -14,5 +16,9 @@ class Spesialis extends Model
         'spesialis_id',
         'spesialis'
     ];
+
+    public function user() {
+        return $this->hasMany(User::class, 'spesialis_id');
+    }
 
 }

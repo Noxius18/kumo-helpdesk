@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('email', 50)->unique();
             $table->string('password', 100);
             $table->char('spesialis_id', 5)->nullable();            
-            $table->char('roles_id', 5);
+            $table->char('role_id', 5);
             $table->char('departemen_id', 5);
 
             // Foreign Key
             $table->foreign('spesialis_id')->references('spesialis_id')->on('spesialisasi');
-            $table->foreign('roles_id')->references('roles_id')->on('roles');
+            $table->foreign('role_id')->references('role_id')->on('roles');
             $table->foreign('departemen_id')->references('departemen_id')->on('departemen');
         
         });

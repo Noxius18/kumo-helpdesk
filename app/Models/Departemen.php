@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\User;
+
 class Departemen extends Model
 {
     protected $table = 'departemen';
@@ -14,4 +16,8 @@ class Departemen extends Model
         'departemen_id',
         'nama_departemen'
     ];
+
+    public function user() {
+        return $this->hasMany(User::class, 'departemen_id');
+    }
 }
