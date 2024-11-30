@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Tiket;
+
 class Kategori extends Model
 {
     protected $table = 'kategori';
@@ -14,5 +16,9 @@ class Kategori extends Model
         'kategori_id',
         'kategori'
     ];
+
+    public function tiket() {
+        return $this->hasMany(Tiket::class, 'kategori_id');
+    }
 
 }
