@@ -6,31 +6,24 @@
     <title>{{ $title }}</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-kumoBlue-100 flex flex-col items-center justify-center min-h-screen">
-    <header class="w-full bg-blue-600 p-4 flex justify-between items-center">
-        <div class="flex items-center">
-            <img alt="Kumo logo" class="mr-2" height="30" src="https://storage.googleapis.com/a1aa/image/BwNrtgmz4qKMEpCq2pAP4XXQnfdFDDR4ofpAYfe2hexxRKxeE.jpg" width="30"/>
-            <span class="text-white text-lg font-bold">kumo</span>
-            <span class="text-white text-sm">helpdesk.</span>
+<body class="bg-gray-900 flex flex-col items-center justify-center min-h-screen">
+    <!-- component -->
+    <div class="min-h-screen flex items-center justify-center w-full">
+        <div class="bg-kumoBlue-100 shadow-md rounded-lg px-8 py-6 max-w-md">
+            <img src="{{ asset('images/logo/logo1.png') }}" alt="Logo" class="mb-4">
+            <form action="/login" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-white mb-2">Email Address</label>
+                    <input type="email" id="email" name="email" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-blue-300 focus:border-blue-300" placeholder="Masukkan Email" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-white mb-2">Password</label>
+                    <input type="password" id="password" name="password" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-blue-300 focus:border-blue-300" placeholder="Masukkan Password" required>
+                </div>
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Login</button>
+            </form>
         </div>
-        <a class="text-white text-sm" href="#">Kontak Kami</a>
-    </header>
-    <main class="bg-blue-600 rounded-lg p-8 mt-8 w-full max-w-md">
-        <div class="flex flex-col items-center mb-6">
-            <img alt="Cloud logo" class="mb-4" height="50" src="https://storage.googleapis.com/a1aa/image/PLhdKLz7DRobCl6UY4Q2c5Xu6l1ZFvebrlf0zDnxQU0MSJ2TA.jpg" width="50"/>
-            <h1 class="text-white text-2xl font-bold">kumo</h1>
-            <p class="text-white text-sm">helpdesk.</p>
-        </div>
-        <p class="text-white text-center mb-6">Silahkan masukkan email &amp; password Anda.</p>
-        <form class="space-y-4" action="/login" method="POST"> <!-- Tambahkan action dan method -->
-            @csrf <!-- Tambahkan token CSRF untuk keamanan -->
-            <input class="w-full p-3 rounded-full bg-blue-200 text-gray-700 focus:outline-none" placeholder="Email" type="email" name="email" required/> <!-- Tambahkan name dan required -->
-            <input class="w-full p-3 rounded-full bg-blue-200 text-gray-700 focus:outline-none" placeholder="Password" type="password" name="password" required/> <!-- Tambahkan name dan required -->
-            <div class="text-right">
-                <a class="text-white text-sm" href="#">Lupa password?</a>
-            </div>
-            <button class="w-full p-3 rounded-full bg-blue-200 text-gray-700 font-bold" type="submit">LOGIN</button>
-        </form>
-    </main>
+    </div>
 </body>
 </html>
