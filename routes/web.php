@@ -18,18 +18,21 @@ use App\Http\Controllers\Auth\LoginController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('auth.login');
 });
 
 Route::get('/login', [LoginController::class, 'showLogin'])->name('auth.login');
 Route::post('/login', [LoginController::class, 'authLogin']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 
-// ROute End-Point untuk Admin
-Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('dashboard.admin');
+// Ruute End-Point untuk Admin
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('dashboard.admin')
+->middleware('auth', 'role:Admin');
 
 // Route End-Point untuk Teknisi
-Route::get('/teknisi/dashboard', [TeknisiController::class, 'index'])->name('dashboard.teknisi');
+Route::get('/teknisi/dashboard', [TeknisiController::class, 'index'])->name('dashboard.teknisi')
+->middleware('auth', 'role:Teknisi');;
 
 // Route End-Point untuk Karyawan
-Route::get('/karyawan/dashboard', [KaryawanController::class, 'index'])->name('dashboard.karyawan');
+Route::get('/karyawan/dashboard', [KaryawanController::class, 'index'])->name('dashboard.karyawan')
+->middleware('auth', 'role:Karyawan');
