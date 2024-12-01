@@ -16,8 +16,7 @@ class UserSeeder extends Seeder
     {
         User::create([
             'user_id' => 'U101',
-            'nama_depan' => 'Niccolo',
-            'nama_belakang' => 'Machiavelli',
+            'nama' => 'Niccolo Machiavelli',
             'email' => 'niccolo@kumomail.dev',
             'password' => bcrypt('password'),
             'spesialis_id' => null,
@@ -27,8 +26,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'user_id' => 'U102',
-            'nama_depan' => 'Soren',
-            'nama_belakang' => 'Kierkeegard',
+            'nama' => 'Soren Kierkeegard',
             'email' => 'soren@kumomail.dev',
             'password' => bcrypt('password'),
             'spesialis_id' => 'SP102',
@@ -38,8 +36,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'user_id' => 'U103',
-            'nama_depan' => 'Immanuel',
-            'nama_belakang' => 'Kant',
+            'nama' => 'Immanuel Kent',
             'email' => 'kant@kumomail.dev',
             'password' => bcrypt('password'),
             'spesialis_id' => null,

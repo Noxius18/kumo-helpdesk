@@ -3,22 +3,26 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Auth;
 
 use App\Models\Role;
 use App\Models\Departemen;
 use App\Models\Spesialis;
 use App\Models\Tiket;
 use App\Models\Note;
-class User extends Model
+class User extends Auth
 {
+    use Notifiable;
+
     protected $table = 'user';
     protected $primaryKey = 'user_id';
     protected $keyType = 'string';
     public $timestamps = false;
     protected $fillable = [
         'user_id',
-        'nama_depan',
-        'nama_belakang',
+        'nama',
         'email',
         'password',
         'spesialis_id',
