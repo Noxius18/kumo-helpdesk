@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('prioritas', ['Low', 'Medium', 'High']);
             $table->enum('status', ['Open', 'In_Progress', 'Resolved', 'Closed']);
             $table->string('teknisi_id', 7);
-            $table->timestamp('tanggal_selesai');
+            $table->timestamp('tanggal_selesai')->nullable();
 
             // Foreign Key
             $table->foreign('user_id')->references('user_id')->on('user');
