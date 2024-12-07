@@ -7,7 +7,6 @@
     <title>{{ $title }}</title>
 </head>
 <body>
-    <h2>Dashboard Karyawan</h2>
-    <h3>Selamat datang {{ Auth::user()->nama }}</h3>
+    @extends('layouts.app')
 </body>
 </html>

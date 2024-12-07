@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helpdesk</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-kumoBlue p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-white text-lg font-bold">Kumo Helpdesk</a>
+            <div>
+                <a href="#" class="text-white px-4">Home</a>
+                <a href="#" class="text-white px-4">Tickets</a>
+                <a href="#" class="text-white px-4">Profile</a>
+                <a href="#" class="text-white px-4">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Sidebar -->
+            <aside class="bg-white p-4 rounded shadow">
+                <h2 class="font-bold text-lg mb-4">Menu</h2>
+                <ul>
+                    <li><a href="#" class="text-kumoBlue">Dashboard</a></li>
+                    <li><a href="#" class="text-kumoBlue">Manage Users</a></li>
+                    <li><a href="#" class="text-kumoBlue">View Tickets</a></li>
+                    <li><a href="#" class="text-kumoBlue">Reports</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Section -->
+            <main class="bg-white p-4 rounded shadow col-span-2">
+                <h1 class="font-bold text-xl mb-4">Dashboard</h1>
+                <p>Selamat datang di dashboard helpdesk. Pilih menu di sebelah kiri untuk mulai.</p>
+                <!-- Konten spesifik untuk role -->
+                <div id="role-specific-content">
+                    <!-- Konten untuk Admin -->
+                    <div id="admin-content" class="hidden">
+                        <h2 class="font-bold text-lg mt-4">Admin Panel</h2>
+                        <p>Kelola pengguna dan tiket di sini.</p>
+                    </div>
+
+                    <!-- Konten untuk Teknisi -->
+                    <div id="technician-content" class="hidden">
+                        <h2 class="font-bold text-lg mt-4">Teknisi Panel</h2>
+                        <p>Kerjakan tiket yang ditugaskan kepada Anda.</p>
+                    </div>
+
+                    <!-- Konten untuk Karyawan -->
+                    <div id="employee-content" class="hidden">
+                        <h2 class="font-bold text-lg mt-4">Karyawan Panel</h2>
+                        <p>Ajukan tiket baru dan lihat status tiket Anda.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Simulasi role
+        const role = 'employee'; // Ganti dengan 'technician' atau 'employee' sesuai role yang diinginkan
+
+        document.getElementById(`${role}-content`).classList.remove('hidden');
+    </script>
+</body>
+</html>
