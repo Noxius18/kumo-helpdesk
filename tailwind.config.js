@@ -8,6 +8,7 @@ export default {
       './resources/**/*.blade.php',
       './resources/**/*.js',
       './resources/**/*.vue',
+      './node_modules/flowbite/**/*.js',
   ],
   theme: {
       extend: {
@@ -17,17 +18,19 @@ export default {
           },
           colors: {
               "kumoBlue": {
-                  100: "#0674B3",
-                  200: "#009FD9",
-                  300: "#12D2F2"
+                  100: "#0A497E", // Lebih gelap dari 100, tetapi tetap seimbang
+                  200: "#0077B6", // Warna biru cerah namun netral
+                  300: "#00A3CC"
               },
               "kumoWhite": {
-                  100: "#FFFCFC",
-                  200: "#FDFEFF",
-                  300: "#FFFEFE"
+                  100: "#E3E3E3", // Warna abu cerah untuk netralitas
+                  200: "#F1F1F1", // Hampir putih, tetap seimbang
+                  300: "#FAFAFA"
               }
           },
       },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin'),
+  ],
 };
