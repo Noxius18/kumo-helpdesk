@@ -27,9 +27,13 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 
 // Ruute End-Point untuk Admin
 Route::middleware(['auth', 'role:Admin'])->group(function() {
+    // GET End-Point
     Route::get('admin/dashboard', [AdminController::class, 'index'])->name('dashboard.admin');
+    Route::get('admin/data-admin', [AdminController::class, 'dataAdmin'])->name('dashboard.admin.data-admin');
     Route::get('admin/data-karyawan', [AdminController::class, 'dataKaryawan'])->name('dashboard.admin.data-karyawan');
     Route::get('admin/data-teknisi', [AdminController::class, 'dataTeknisi'])->name('dashboard.admin.data-teknisi');
+
+    // POST End-Point
 });
 
 // Route End-Point untuk Teknisi

@@ -28,7 +28,7 @@
             <!-- Body Tabel -->
             <tbody>
                 <!-- Baris Genap -->
-                @foreach ($karyawan as $index => $user)
+                @foreach ($admin as $index => $user)
                     <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-kumoWhite-100' }} hover: bg-gray-200">
                         <td class="px-6 py-4">{{ $index + 1 }}</td>
                         <td class="px-6 py-4">{{ $user->nama }}</td>

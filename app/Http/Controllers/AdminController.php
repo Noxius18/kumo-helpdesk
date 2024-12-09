@@ -18,15 +18,45 @@ class AdminController extends Controller
         ]);
     }
 
+    public function dataAdmin() {
+        $admin = User::with(['role', 'departemen'])
+            ->whereHas('role', function($query) {
+                $query->where('role', 'Admin');
+            })
+            ->orderByRaw("CAST(SUBSTRING(user_id, 2) AS UNSIGNED)")
+            ->get();
+
+        return view('admin.user.admin', [
+            'title' => 'Daftar Admin',
+            'admin' => $admin
+        ]);
+    }
+    
     public function dataKaryawan() {
+        $karyawan = User::with(['role', 'departemen'])
+            ->whereHas('role', function($query) {
+                $query->where('role', 'Karyawan');
+            })
+            ->orderByRaw("CAST(SUBSTRING(user_id, 2) AS UNSIGNED)")
+            ->get();
+
         return view('admin.user.karyawan', [
             'title' => 'Daftar Karyawan',
+            'karyawan' => $karyawan,
         ]);
     }
 
     public function dataTeknisi() {
+        $teknisi = User::with(['role', 'spesialis', 'departemen'])
+            ->whereHas('role', function($query) {
+                $query->where('role', 'Teknisi');
+            })
+            ->orderByRaw("CAST(SUBSTRING(user_id, 2) AS UNSIGNED)")
+            ->get();
+
         return view('admin.user.teknisi', [
             'title' => 'Daftar Teknisi',
+            'teknisi' => $teknisi,
         ]);
     }
 
