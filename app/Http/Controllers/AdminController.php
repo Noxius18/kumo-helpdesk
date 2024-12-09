@@ -18,6 +18,18 @@ class AdminController extends Controller
         ]);
     }
 
+    public function dataKaryawan() {
+        return view('admin.user.karyawan', [
+            'title' => 'Daftar Karyawan',
+        ]);
+    }
+
+    public function dataTeknisi() {
+        return view('admin.user.teknisi', [
+            'title' => 'Daftar Teknisi',
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
