@@ -43,6 +43,7 @@
                             <i class="fas fa-chevron-down ml-auto"></i>
                           </a>
                           <ul id="dropdownUser" class="submenu space-y-2 pl-4">
+                            <li><a href="{{ route('dashboard.admin.data-admin') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center">Admin</a></li>
                             <li><a href="{{ route('dashboard.admin.data-karyawan') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center">Karyawan</a></li>
                             <li><a href="{{ route('dashboard.admin.data-teknisi') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center">Teknisi</a></li>
                           </ul>
