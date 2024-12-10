@@ -5,6 +5,7 @@
     <title>{{ $title }}</title>
     @vite('resources/css/app.css')
     <link href="https://unpkg.com/flowbite@1.4.0/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ asset('layouts/styles.css') }}">
 </head>
 <body class="bg-kumoWhite-100 font-varela">
@@ -98,6 +99,57 @@
         }
       })
     })
+  </script>
+
+  {{-- Sweetalert 2 --}}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      @if(session('success'))
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil!',
+          text: '{{ session('success') }}',
+          confirmButtonText: 'Oke',
+          confirmButtonColor: '#28A745'
+        });
+      @endif
+
+      @if(session('error'))
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal!',
+          text: '{{ session('error') }}',
+          confirmButtonText: 'Oke',
+          confirmButtonColor: '#DC3545'
+        });
+      @endif
+    })
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteButtons = document.querySelectorAll('.delete-button');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const form = this.closest('form');
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Data ini akan dihapus secara permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
   </script>
 
 </body>
