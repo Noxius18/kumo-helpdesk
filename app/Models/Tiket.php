@@ -35,12 +35,16 @@ class Tiket extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function teknisi() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function kategori() {
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 
     public function foto() {
-        return $this->hasMany(Foto::class);
+        return $this->hasMany(Foto::class, 'tiket_id', 'tiket_id');
     } 
 
     public function note() {

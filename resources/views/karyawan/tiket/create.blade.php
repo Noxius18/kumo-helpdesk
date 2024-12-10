@@ -53,18 +53,10 @@
         <!-- Status -->
         <div>
             <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-            <select id="status" name="status" required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                <option value="">Pilih Status</option>
-                <option value="Open" {{ old('status') == 'Open' ? 'selected' : '' }}>Open</option>
-                <option value="In_Progress" {{ old('status') == 'In_Progress' ? 'selected' : '' }}>In Progress</option>
-                <option value="Resolved" {{ old('status') == 'Resolved' ? 'selected' : '' }}>Resolved</option>
-                <option value="Closed" {{ old('status') == 'Closed' ? 'selected' : '' }}>Closed</option>
-            </select>
-            @error('status')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
+            <input type="text" id="status" name="status" value="Open" readonly
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 text-gray-700 sm:text-sm">
         </div>
+        
 
         <!-- Lampiran -->
         <div>
