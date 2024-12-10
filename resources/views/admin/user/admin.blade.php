@@ -38,8 +38,8 @@
                         <td class="px-6 py-4">
                             <div class="flex space-x-2">
                                 <a href="/admin/users/1" class="text-blue-500 hover:underline">Detail</a>
-                                <a href="/admin/users/1/edit" class="text-yellow-500 hover:underline">Edit</a>
-                                <form action="/admin/users/1" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                <a href="{{ route('admin.user.edit', $user->user_id) }}" class="text-yellow-500 hover:underline">Edit</a>
+                                <form action="{{ route('admin.user.destroy', $user->user_id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <button type="submit" class="text-red-500 hover:underline">Hapus</button>

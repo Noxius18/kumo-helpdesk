@@ -37,7 +37,8 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
     Route::get('admin/tambah-user', [UserController::class, 'create'])->name('admin.form-user');
 
     // POST End-Point
-    Route::post('admin/tambah-user', [UserController::class, 'store'])->name('admin.tambah-user');
+    Route::resource('admin/user', UserController::class, ['as' => 'admin']);
+    // Route::post('admin/tambah-user', [UserController::class, 'store'])->name('admin.tambah-user');
 });
 
 // Route End-Point untuk Teknisi
