@@ -17,9 +17,47 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function indexAdmin()
     {
+        $admin = User::with(['role', 'departemen'])
+            ->whereHas('role', function($query) {
+                $query->where('role', 'Admin');
+            })
+            ->orderByRaw("CAST(SUBSTRING(user_id, 2) AS UNSIGNED)")
+            ->get();
 
+        return view('admin.user.index.admin', [
+            'title' => 'Daftar Admin',
+            'admin' => $admin
+        ]);
+    }
+
+    public function indexKaryawan() {
+        $karyawan = User::with(['role', 'departemen'])
+            ->whereHas('role', function($query) {
+                $query->where('role', 'Karyawan');
+            })
+            ->orderByRaw("CAST(SUBSTRING(user_id, 2) AS UNSIGNED)")
+            ->get();
+
+        return view('admin.user.index.karyawan', [
+            'title' => 'Daftar Karyawan',
+            'karyawan' => $karyawan,
+        ]);
+    }
+
+    public function indexTeknisi() {
+        $teknisi = User::with(['role', 'spesialis', 'departemen'])
+            ->whereHas('role', function($query) {
+                $query->where('role', 'Teknisi');
+            })
+            ->orderByRaw("CAST(SUBSTRING(user_id, 2) AS UNSIGNED)")
+            ->get();
+
+        return view('admin.user.index.teknisi', [
+            'title' => 'Daftar Teknisi',
+            'teknisi' => $teknisi,
+        ]);
     }
 
     /**
@@ -84,7 +122,20 @@ class UserController extends Controller
             User::create($validasiData);
 
             Log::info('User berhasil ditambah: ', $validasiData);
-            return redirect()->route('dashboard.admin')->with('success', 'User berhasil ditambah!');
+
+            $roleId = $validasiData['role_id'];
+            if($roleId === 'RL001') {
+                return redirect()->route('dashboard.admin.data-admin')->with('success', 'Data Admin Berhasil ditambah');
+            }
+            elseif($roleId === 'RL002') {
+                return redirect()->route('dashboard.admin.data-teknisi')->with('success', 'Data teknisi berhasil ditambah');
+            }
+            elseif($roleId === 'RL003') {
+                return redirect()->route('dashboard.admin.data-karyawan')->with('success', 'Data Karyawan berhasil ditambah');
+            }
+            else {
+                return redirect()->route('dashboard.admin')->with('success', 'Data berhasil ditambah');
+            }
         } catch (\Exception $e) {
             Log::error('Error saat menyimpan data', ['message' => $e->getMessage()]);
             return redirect()->back()->with('error', 'Error saat menyimpan data');

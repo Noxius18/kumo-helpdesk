@@ -23,7 +23,7 @@
         </div>
         <div class="bg-white shadow rounded-lg p-6">
             <h3 class="text-xl font-semibold text-gray-700">Total Pengguna</h3>
-            <p class="mt-2 text-3xl font-bold text-red-500">50</p>
+            <p class="mt-2 text-3xl font-bold text-red-500">{{ $totalUser }}</p>
         </div>
     </div>
     @endsection
