@@ -4,13 +4,6 @@
     <!-- Judul Halaman -->
     <h3 class="text-2xl font-semibold text-gray-700 mb-4">{{ $title }}</h3>
 
-    <!-- Tombol Tambah Pengguna -->
-    <div class="flex justify-end mb-4">
-        <a href="/admin/users/create" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
-            Tambah Pengguna
-        </a>
-    </div>
-
     <!-- Tabel Data Pengguna -->
     <div class="overflow-x-auto">
         <table class="w-full border-collapse bg-gray-50 text-left text-sm text-gray-600">

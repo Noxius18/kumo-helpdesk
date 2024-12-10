@@ -36,7 +36,7 @@ class Tiket extends Model
     }
 
     public function teknisi() {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'teknisi_id');
     }
 
     public function kategori() {
