@@ -56,9 +56,9 @@
                         <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>List Tiket</a></li>
                         <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-sticky-note mr-2"></i>Catatan Tiket</a></li>
                     @elseif (Auth::user()->role->role === 'Karyawan')
-                        <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-th-large mr-2"></i>Dashboard</a></li>
+                        <li><a href="{{ route('dashboard.karyawan') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-th-large mr-2"></i>Dashboard</a></li>
                         <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>List Tiket</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-pen mr-2"></i>Buat Tiket</a></li>
+                        <li><a href="{{ route('karyawan.tiket.create') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-pen mr-2"></i>Buat Tiket</a></li>
                     @endif
                 @endif
             </ul>

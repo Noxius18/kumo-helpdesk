@@ -26,6 +26,11 @@ class Tiket extends Model
         'tanggal_selesai'
     ];
 
+    protected $casts = [
+        'tanggal_lapor' => 'datetime',
+        'tanggal_selesai' => 'datetime'
+    ];
+
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -33,6 +38,10 @@ class Tiket extends Model
     public function kategori() {
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
+
+    public function foto() {
+        return $this->hasMany(Foto::class);
+    } 
 
     public function note() {
         return $this->hasMany(Note::class, 'note_id');
