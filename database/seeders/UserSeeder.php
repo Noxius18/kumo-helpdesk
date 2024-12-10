@@ -36,12 +36,22 @@ class UserSeeder extends Seeder
 
         User::create([
             'user_id' => 'U103',
-            'nama' => 'Immanuel Kent',
+            'nama' => 'Immanuel Kant',
             'email' => 'kant@kumomail.dev',
             'password' => bcrypt('password'),
             'spesialis_id' => null,
             'role_id' => 'RL003',
             'departemen_id' => 'DP105'
+        ]);
+
+        User::create([
+            'user_id' => 'U104',
+            'nama' => 'Kasane Teto',
+            'email' => 'teto@kumomail.dev',
+            'password' => bcrypt('password'),
+            'spesialis_id' => null,
+            'role_id' => 'RL003',
+            'departemen_id' => 'DP103'
         ]);
     }
 }

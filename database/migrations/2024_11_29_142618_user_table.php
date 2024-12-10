@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama', 75);
             $table->string('email', 50)->unique();
             $table->string('password', 100);
+            $table->string('foto')->nullable();
             $table->char('spesialis_id', 5)->nullable();            
             $table->char('role_id', 5);
             $table->char('departemen_id', 5);

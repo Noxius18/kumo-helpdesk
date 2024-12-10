@@ -4,8 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title }}</title>
     @vite('resources/css/app.css')
+    <link rel="shortcut icon" href="{{ asset('images/logo/logo1.ico') }}" type="image/x-icon">
     <link href="https://unpkg.com/flowbite@1.4.0/dist/flowbite.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ asset('layouts/styles.css') }}">
 </head>
 <body class="bg-kumoWhite-100 font-varela">
@@ -56,9 +56,9 @@
                         <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>List Tiket</a></li>
                         <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-sticky-note mr-2"></i>Catatan Tiket</a></li>
                     @elseif (Auth::user()->role->role === 'Karyawan')
-                        <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-th-large mr-2"></i>Dashboard</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>List Tiket</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-pen mr-2"></i>Buat Tiket</a></li>
+                        <li><a href="{{ route('dashboard.karyawan') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-th-large mr-2"></i>Dashboard</a></li>
+                        <li><a href="{{  route('karyawan.list-tiket') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>List Tiket</a></li>
+                        <li><a href="{{ route('karyawan.tiket.create') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-pen mr-2"></i>Buat Tiket</a></li>
                     @endif
                 @endif
             </ul>
@@ -74,6 +74,7 @@
   </div>
 
   {{-- Script JS --}}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   {{-- Script Toggle submenu --}}
   <script>
