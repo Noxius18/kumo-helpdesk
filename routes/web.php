@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\TeknisiController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -33,7 +34,10 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
     Route::get('admin/data-karyawan', [AdminController::class, 'dataKaryawan'])->name('dashboard.admin.data-karyawan');
     Route::get('admin/data-teknisi', [AdminController::class, 'dataTeknisi'])->name('dashboard.admin.data-teknisi');
 
+    Route::get('admin/tambah-user', [UserController::class, 'create'])->name('admin.form-user');
+
     // POST End-Point
+    Route::post('admin/tambah-user', [UserController::class, 'store'])->name('admin.tambah-user');
 });
 
 // Route End-Point untuk Teknisi
