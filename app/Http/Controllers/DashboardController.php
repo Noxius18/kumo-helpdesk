@@ -13,10 +13,16 @@ class DashboardController extends Controller
     public function dashboardAdmin() {
         
         $totalUser = User::count();
+        $totalTiket = Tiket::count();
+        $openTiket = Tiket::where('status', 'Open')->count();
+        $progresTiket = Tiket::where('status', 'In_Progress')->count();
         
         return view('admin.index', [
             'title' => 'Dashboard Admin',
-            'totalUser' => $totalUser
+            'totalUser' => $totalUser,
+            'totalTiket' => $totalTiket,
+            'openTiket' => $openTiket,
+            'progresTiket' => $progresTiket
         ]);
     }
 

@@ -18,10 +18,8 @@ class TiketController extends Controller
      */
     public function index()
     {
-        $tickets = Tiket::with(['user', 'kategori'])->get();
-        $teknisi = user::whereHas('role', function($query) {
-            $query->where('role', 'Teknisi');
-        })->get();
+        $tickets = Tiket::with(['user', 'kategori', 'teknisi'])->orderBy('tanggal_lapor', 'desc')->get();
+        $teknisi = User::where('role_id', 'RL002')->get();
 
         return view('admin.tiket.index', [
             'title' => 'Daftar Tiket',
@@ -111,7 +109,7 @@ class TiketController extends Controller
             }
         }
 
-        return redirect()->route('karyawan.list-tiket')->with('success', 'Berhasil membuat tiket');
+        return redirect()->route('karyawan.tiket-list')->with('success', 'Berhasil membuat tiket');
 
     }
 
