@@ -37,7 +37,7 @@
                 @if (Auth::check())
                     @if (Auth::user()->role->role === 'Admin')
                         <li><a href="{{ route('dashboard.admin') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-th-large mr-2"></i>Dashboard</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>Tiket</a></li>
+                        <li><a href="{{ route('admin.tiket.list-tiket') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>Tiket</a></li>
                         <li>
                           <a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center" onclick="toggleSubMenu('dropdownUser')">
                             <i class="fas fa-users mr-2"></i>Users
@@ -151,6 +151,46 @@
             });
         });
     });
+  </script>
+
+  {{-- Script Modal --}}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const openModalButtons = document.querySelectorAll('.open-modal');
+        openModalButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const modalId = this.getAttribute('data-modal-target');
+                openModal(modalId);
+            });
+        });
+
+        const cancelButtons = document.querySelectorAll('[data-dismiss="modal"]');
+        cancelButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const modalId = this.getAttribute('data-target');
+                closeModal(modalId);
+            });
+        });
+    });
+
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeModal(modalId);
+                }
+            });
+        }
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+    }
   </script>
 
 </body>
