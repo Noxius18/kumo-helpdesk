@@ -31,9 +31,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 
 // Ruute End-Point untuk Admin
 Route::middleware(['auth', 'role:Admin'])->group(function() {
-    /*
-    |   GET End-Point
-    */
     // Dashboard
     Route::get('admin/dashboard', [DashboardController::class, 'dashboardAdmin'])->name('dashboard.admin');
 
@@ -48,8 +45,12 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
 });
 
 Route::middleware(['auth', 'role:Karyawan'])->group(function() {
-    // Get End-Point
+    // Dashboard
     Route::get('karyawan/dashboard', [DashboardController::class, 'dashboardKaryawan'])->name('dashboard.karyawan');
 
+    // Index Tiket
+    Route::get('karyawan/list-tiket', [TiketController::class, 'tiketKaryawan'])->name('karyawan.list-tiket');
+
+    // CRUD Tiket
     Route::resource('karyawan/tiket', TiketController::class, ['as' => 'karyawan']);
 });

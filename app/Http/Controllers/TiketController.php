@@ -30,6 +30,18 @@ class TiketController extends Controller
         ]);
     }
 
+    public function tiketKaryawan() {
+        $tickets = Tiket::with('kategori')
+            ->where('user_id', auth()->user()->user_id)
+            ->orderBy('tanggal_lapor', 'desc')
+            ->get();
+        
+            return view('karyawan.tiket.index', [
+                'title' => 'List Tiket',
+                'tickets' => $tickets
+            ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -71,12 +83,14 @@ class TiketController extends Controller
         // Membuat id Tiket
         $ticketId = $tahun . $bulan . $hari . str_pad($jumlahTiket + 1, 3, '0', STR_PAD_LEFT); 
         
+        // Nilai Default untuk Status
+        
         $tiket = Tiket::create([
             'tiket_id' => $ticketId,
             'user_id' => auth()->id(),
             'kategori_id' => $request->kategori_id,
             'deskripsi' => $request->deskripsi,
-            'tanggal_lapor' => now(),
+            'tanggal_lapor' => now()->timezone('Asia/Jakarta'),
             'prioritas' => $request->prioritas,
             'status' => $request->status
         ]);
@@ -97,7 +111,7 @@ class TiketController extends Controller
             }
         }
 
-        return redirect()->route('dashboard.karyawan')->with('success', 'Berhasil membuat tiket');
+        return redirect()->route('karyawan.list-tiket')->with('success', 'Berhasil membuat tiket');
 
     }
 
@@ -106,7 +120,16 @@ class TiketController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $tiket = Tiket::with(['user', 'kategori', 'teknisi', 'foto', 'note'])->findOrFail($id);
+
+        if($tiket->user_id !== auth()->id()) {
+            abort(403, 'Kamu tidak memiliki izin untuk melihat detail tiket ini');
+        }
+
+        return view('karyawan.tiket.detail', [
+            'title' => 'Detail Tiket',
+            'tiket' => $tiket
+        ]);
     }
 
     /**

@@ -58,7 +58,7 @@
                                     <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $ticket->status }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-700 border-b">{{ $ticket->tanggal_lapor->format('d-M-Y') }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-700 border-b">
-                                        <a href="/tickets/detail/{{ $ticket->tiket_id }}" class="text-blue-500 hover:underline">Detail</a>
+                                        <a href="{{ route('karyawan.tiket.show', $ticket->tiket_id) }}" class="text-blue-500 hover:underline">Detail</a>
                                     </td>
                                 </tr>
                             @endforeach
