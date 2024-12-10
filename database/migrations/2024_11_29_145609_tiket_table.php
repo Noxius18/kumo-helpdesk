@@ -18,8 +18,8 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->timestamp('tanggal_lapor');
             $table->enum('prioritas', ['Low', 'Medium', 'High']);
-            $table->enum('status', ['Open', 'In_Progress', 'Resolved', 'Closed'])->default('Open');
-            $table->string('teknisi_id', 7);
+            $table->enum('status', ['Open', 'Progress', 'Resolved', 'Closed'])->default('Open');
+            $table->string('teknisi_id', 7)->nullable();
             $table->timestamp('tanggal_selesai')->nullable();
 
             // Foreign Key

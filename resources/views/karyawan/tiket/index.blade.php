@@ -31,13 +31,13 @@
                         </td>
                         <td class="px-6 py-4">
                             <span class="px-2 py-1 rounded-full text-xs font-semibold 
-                                {{ $tiket->status == 'Open' ? 'bg-blue-500' : ($tiket->status == 'In_Progress' ? 'bg-orange-500' : ($tiket->status == 'Resolved' ? 'bg-green-500' : 'bg-gray-500')) }}">
+                                {{ $tiket->status == 'Open' ? 'bg-blue-500' : ($tiket->status == 'Progress' ? 'bg-orange-500' : ($tiket->status == 'Resolved' ? 'bg-green-500' : 'bg-gray-500')) }}">
                                 {{ str_replace('_', ' ', $tiket->status) }}
                             </span>
                         </td>
                         <td class="px-6 py-4">{{ $tiket->tanggal_lapor->format('d-m-Y H:i') }}</td>
                         <td class="px-6 py-4">
-                            <a href="{{ route('karyawan.tiket.show', $tiket->tiket_id) }}" 
+                            <a href="{{ route('karyawan.tiket.detail', $tiket->tiket_id) }}" 
                                class="text-blue-500 hover:underline">Detail</a>
                         </td>
                     </tr>
