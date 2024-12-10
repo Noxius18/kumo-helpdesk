@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\TeknisiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TiketController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -34,7 +36,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
     */
     // Dashboard
     Route::get('admin/dashboard', [DashboardController::class, 'dashboardAdmin'])->name('dashboard.admin');
-    
+
     // Index User
     Route::get('admin/data-admin', [UserController::class, 'indexAdmin'])->name('dashboard.admin.data-admin');
     Route::get('admin/data-karyawan', [UserController::class, 'indexKaryawan'])->name('dashboard.admin.data-karyawan');
@@ -45,10 +47,9 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
     // Route::post('admin/tambah-user', [UserController::class, 'store'])->name('admin.tambah-user');
 });
 
-// Route End-Point untuk Teknisi
-Route::get('/teknisi/dashboard', [TeknisiController::class, 'index'])->name('dashboard.teknisi')
-->middleware('auth', 'role:Teknisi');;
+Route::middleware(['auth', 'role:Karyawan'])->group(function() {
+    // Get End-Point
+    Route::get('karyawan/dashboard', [DashboardController::class, 'dashboardKaryawan'])->name('dashboard.karyawan');
 
-// Route End-Point untuk Karyawan
-Route::get('/karyawan/dashboard', [KaryawanController::class, 'index'])->name('dashboard.karyawan')
-->middleware('auth', 'role:Karyawan');
+    Route::resource('karyawan/tiket', TiketController::class, ['as' => 'karyawan']);
+});
