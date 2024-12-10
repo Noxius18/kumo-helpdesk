@@ -104,7 +104,18 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $role = Role::all();
+        $departemen = Departemen::all();
+        $spesialis = Spesialis::all();
+
+        return view('admin.user.update', [
+            'title' => 'Edit User',
+            'user' => $user,
+            'roles' => $role,
+            'departemen' => $departemen,
+            'spesialis' => $spesialis,
+        ]);
     }
 
     /**
@@ -112,7 +123,32 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $rules = [
+            'nama' => 'required|string|max:255',
+            'spesialis_id' => 'nullable',
+            'role_id' => 'required',
+            'departemen_id' => 'required'
+        ];
+
+        if($request->email != $user->email){
+            $rules['email'] = 'required|string|max:255|email|unique:user,email,' . $user->user_id . ',user_id';
+        }
+
+        if($request->filled('password')) {
+            $rules['password'] = ['required|string|min:8|', 
+                Password::min(8)
+                ->mixedCase()
+                ->letters()
+                ->numbers()
+                ->symbols()
+            ];
+        }
+
+        $validasiData = $request->validate($rules);
+        $user->update($validasiData);
+
+        return redirect()->route('dashboard.admin')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -120,6 +156,9 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('dashboard.admin')->with('success', 'Data berhasil dihapus');
     }
 }

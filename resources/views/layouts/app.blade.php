@@ -43,7 +43,7 @@
                             <i class="fas fa-chevron-down ml-auto"></i>
                           </a>
                           <ul id="dropdownUser" class="submenu space-y-2 pl-4">
-                            <li><a href="{{ route('admin.tambah-user') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-solid fa-user-plus mr-2"></i>Tambah User</a></li>
+                            <li><a href="{{ route('admin.user.create') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-solid fa-user-plus mr-2"></i>Tambah User</a></li>
                             <li><a href="{{ route('dashboard.admin.data-admin') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-solid fa-user-tie mr-2"></i>Admin</a></li>
                             <li><a href="{{ route('dashboard.admin.data-karyawan') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-solid fa-user mr-2"></i>Karyawan</a></li>
                             <li><a href="{{ route('dashboard.admin.data-teknisi') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-solid fa-chalkboard-user mr-2"></i>Teknisi</a></li>

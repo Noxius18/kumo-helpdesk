@@ -29,7 +29,7 @@
             <tbody>
                 <!-- Baris Genap -->
                 @foreach ($karyawan as $index => $user)
-                    <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-kumoWhite-100' }} hover: bg-gray-200">
+                    <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white-100' }} hover: bg-gray-200">
                         <td class="px-6 py-4">{{ $index + 1 }}</td>
                         <td class="px-6 py-4">{{ $user->nama }}</td>
                         <td class="px-6 py-4">{{ $user->email }}</td>
