@@ -31,7 +31,7 @@
                         <td class="px-6 py-4">
                             <div class="flex space-x-2">
                                 <a href="{{ route('admin.user.edit', $user->user_id) }}" class="text-yellow-500 hover:underline">Edit</a>
-                                <form action="{{ route('admin.user.destroy', $user->user_id) }}" method="POST"  class="delete-form">
+                                <form action="{{ route('admin.user.destroy', $user->user_id) }}" method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="text-red-500 hover:underline delete-button">Hapus</button>
