@@ -4,63 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Tiket;
+
 class KaryawanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('karyawan.index', [
-            'title' => 'Dashboard Teknisi'
+    public function indexTiket() {
+        $tickets = Tiket::with('kategori')
+            ->where('user_id', auth()->user()->user_id)
+            ->orderBy('tanggal_lapor', 'desc')
+            ->get();
+        
+            return view('karyawan.tiket.index', [
+                'title' => 'List Tiket',
+                'tickets' => $tickets
+            ]);
+    }
+
+    public function detailTiket($id) {
+        $tiket = Tiket::with(['user', 'kategori', 'teknisi', 'foto', 'note'])->findOrFail($id);
+        
+        return view('karyawan.tiket.detail', [
+            'title' => 'Detail Tiket',
+            'tiket' => $tiket,
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

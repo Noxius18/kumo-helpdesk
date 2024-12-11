@@ -18,28 +18,7 @@ class TiketController extends Controller
      */
     public function index()
     {
-        $tickets = Tiket::with(['user', 'kategori'])->get();
-        $teknisi = user::whereHas('role', function($query) {
-            $query->where('role', 'Teknisi');
-        })->get();
-
-        return view('admin.tiket.index', [
-            'title' => 'Daftar Tiket',
-            'tickets' => $tickets,
-            'teknisi' => $teknisi,
-        ]);
-    }
-
-    public function tiketKaryawan() {
-        $tickets = Tiket::with('kategori')
-            ->where('user_id', auth()->user()->user_id)
-            ->orderBy('tanggal_lapor', 'desc')
-            ->get();
         
-            return view('karyawan.tiket.index', [
-                'title' => 'List Tiket',
-                'tickets' => $tickets
-            ]);
     }
 
     /**
@@ -121,14 +100,10 @@ class TiketController extends Controller
     public function show(string $id)
     {
         $tiket = Tiket::with(['user', 'kategori', 'teknisi', 'foto', 'note'])->findOrFail($id);
-
-        if($tiket->user_id !== auth()->id()) {
-            abort(403, 'Kamu tidak memiliki izin untuk melihat detail tiket ini');
-        }
-
+        
         return view('karyawan.tiket.detail', [
             'title' => 'Detail Tiket',
-            'tiket' => $tiket
+            'tiket' => $tiket,
         ]);
     }
 

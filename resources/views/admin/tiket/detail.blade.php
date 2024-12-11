@@ -89,7 +89,7 @@
 
     <!-- Tombol Kembali -->
     <div class="mt-6 flex justify-end">
-        <a href="{{ route('karyawan.list-tiket') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow">
+        <a href="{{ route('admin.tiket.list-tiket') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow">
             Kembali
         </a>
     </div>

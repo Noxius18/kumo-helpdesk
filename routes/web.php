@@ -39,9 +39,17 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
     Route::get('admin/data-karyawan', [UserController::class, 'indexKaryawan'])->name('dashboard.admin.data-karyawan');
     Route::get('admin/data-teknisi', [UserController::class, 'indexTeknisi'])->name('dashboard.admin.data-teknisi');
 
-    // POST End-Point
+    // Index Admin untuk list Tiket
+    Route::get('admin/data-tiket', [AdminController::class, 'indexTiket'])->name('admin.tiket.list-tiket');
+    Route::get('admin/data-tiket/{id}', [AdminController::class, 'detailTiket'])->name('admin.tiket.detail');
+
+    // Resources untuk CRUD 
     Route::resource('admin/user', UserController::class, ['as' => 'admin']);
-    // Route::post('admin/tambah-user', [UserController::class, 'store'])->name('admin.tambah-user');
+    Route::resource('admin/tiket', TiketController::class, ['as' => 'admin']);
+    
+    // POST End-Point
+    Route::post('admin/data-tiket/{id}/teruskan', [AdminController::class, 'teruskanTiket'])->name('admin.tiket.teruskan');
+    
 });
 
 Route::middleware(['auth', 'role:Karyawan'])->group(function() {
@@ -49,8 +57,9 @@ Route::middleware(['auth', 'role:Karyawan'])->group(function() {
     Route::get('karyawan/dashboard', [DashboardController::class, 'dashboardKaryawan'])->name('dashboard.karyawan');
 
     // Index Tiket
-    Route::get('karyawan/list-tiket', [TiketController::class, 'tiketKaryawan'])->name('karyawan.list-tiket');
-
+    Route::get('karyawan/list-tiket', [KaryawanController::class, 'indexTiket'])->name('karyawan.list-tiket');
+    Route::get('karyawan/list-tiket/{id}', [KaryawanController::class, 'detailTiket'])->name('karyawan.tiket.detail');
+    
     // CRUD Tiket
     Route::resource('karyawan/tiket', TiketController::class, ['as' => 'karyawan']);
 });
