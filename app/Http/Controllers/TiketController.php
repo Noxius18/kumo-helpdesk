@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
+use App\Notifications\NotifikasiTiket;
 use App\Models\Kategori;
 use App\Models\Tiket;
 use App\Models\User;
@@ -27,7 +29,7 @@ class TiketController extends Controller
     public function create()
     {
         $kategori = Kategori::all();
-        return view('karyawan.tiket.create', [
+        return view('v_tiket.create', [
             'title' => 'Buat Tiket Baru',
             'kategori' => $kategori
         ]);
@@ -90,6 +92,16 @@ class TiketController extends Controller
             }
         }
 
+        // Logika untuk Notifikasi
+        $karyawan = Auth::user();
+        $admins = User::where('role_id', 'RL001')->get();
+
+        $message = $karyawan->nama . ' telah membuat tiket baru';
+
+        foreach($admins as $admin) {
+            $admin->notify(new NotifikasiTiket($message, $tiket));
+        }
+
         return redirect()->route('karyawan.list-tiket')->with('success', 'Berhasil membuat tiket');
 
     }
@@ -101,7 +113,7 @@ class TiketController extends Controller
     {
         $tiket = Tiket::with(['user', 'kategori', 'teknisi', 'foto', 'note'])->findOrFail($id);
         
-        return view('karyawan.tiket.detail', [
+        return view('v_tiket.detail', [
             'title' => 'Detail Tiket',
             'tiket' => $tiket,
         ]);

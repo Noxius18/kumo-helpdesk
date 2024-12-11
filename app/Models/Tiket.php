@@ -48,6 +48,6 @@ class Tiket extends Model
     } 
 
     public function note() {
-        return $this->hasMany(Note::class, 'note_id');
+        return $this->hasMany(Note::class, 'tiket_id', 'tiket_id');
     }
 }

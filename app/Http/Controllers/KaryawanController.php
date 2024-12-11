@@ -12,18 +12,18 @@ class KaryawanController extends Controller
         $tickets = Tiket::with('kategori')
             ->where('user_id', auth()->user()->user_id)
             ->orderBy('tanggal_lapor', 'desc')
-            ->get();
+            ->paginate(10);
         
-            return view('karyawan.tiket.index', [
+            return view('v_tiket.index', [
                 'title' => 'List Tiket',
-                'tickets' => $tickets
+                'tikets' => $tickets
             ]);
     }
 
     public function detailTiket($id) {
         $tiket = Tiket::with(['user', 'kategori', 'teknisi', 'foto', 'note'])->findOrFail($id);
         
-        return view('karyawan.tiket.detail', [
+        return view('v_tiket.detail', [
             'title' => 'Detail Tiket',
             'tiket' => $tiket,
         ]);

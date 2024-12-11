@@ -13,18 +13,59 @@
   <div class="flex flex-col h-screen">
     <!-- Navbar -->
     <nav class="bg-kumoBlue-100 text-white p-4 flex justify-between items-center">
-        <div class="flex items-center">
-            <img alt="Kumo logo" class="mr-2" src="{{ asset('images/logo/logo1.png') }}" width="15%"/>
-        </div>
-        <div class="flex items-center">
-            @if (Auth::check())
-                <form action="/logout" method="POST" class="ml-4">
-                    @csrf
-                    <button type="submit" class="text-white hover:bg-kumoBlue-300 px-4 py-2 rounded">Logout</button>
-                </form>
-            @endif
-        </div>
-    </nav>
+      <div class="flex items-center">
+          <img alt="Kumo logo" class="mr-2" src="{{ asset('images/logo/logo1.png') }}" width="15%" />
+      </div>
+      <div class="flex items-center">
+          @if (Auth::check())
+              <!-- Notifikasi Dropdown -->
+              <div class="relative ml-4">
+                  <button class="relative flex items-center focus:outline-none" onclick="toggleDropdown('notificationDropdown')">
+                      <i class="fas fa-bell text-xl"></i>
+                      @if (Auth::user()->unreadNotifications->count() > 0)
+                          <span class="absolute top-0 right-0 text-xs bg-red-500 text-white rounded-full px-1.5 py-0.5">
+                              {{ Auth::user()->unreadNotifications->count() }}
+                          </span>
+                      @endif
+                  </button>
+                  <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-64 bg-white text-gray-700 shadow-lg rounded-md z-50">
+                      <div class="p-4 font-bold text-sm text-gray-900 border-b">
+                          Notifikasi
+                      </div>
+                      <ul class="max-h-60 overflow-y-auto">
+                          @forelse (Auth::user()->unreadNotifications as $notification)
+                              <li class="p-2 hover:bg-gray-100 border-b">
+                                  <p class="text-sm font-medium">{{ $notification->data['message'] }}</p>
+                                  <p class="text-xs text-gray-500">
+                                      {{ $notification->created_at->diffForHumans() }}
+                                  </p>
+                                  @if (isset($notification->data['tiket']['tiket_id']))
+                                      <p class="text-xs text-gray-500">
+                                          Tiket ID: {{ $notification->data['tiket']['tiket_id'] }}
+                                      </p>
+                                  @endif
+                              </li>
+                          @empty
+                              <li class="p-4 text-sm text-gray-500">Tidak ada notifikasi.</li>
+                          @endforelse
+                      </ul>
+                      <div class="text-center p-2">
+                          <form action="{{ route('notifikasi.baca') }}" method="POST">
+                              @csrf
+                              <button type="submit" class="text-blue-600 text-sm hover:underline">Tandai semua sebagai dibaca</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+  
+              <!-- Tombol Logout -->
+              <form action="/logout" method="POST" class="ml-4">
+                  @csrf
+                  <button type="submit" class="text-white hover:bg-kumoBlue-300 px-4 py-2 rounded">Logout</button>
+              </form>
+          @endif
+      </div>
+  </nav>
 
     <div class="flex flex-1">
       <!-- Sidebar -->
@@ -37,7 +78,7 @@
                 @if (Auth::check())
                     @if (Auth::user()->role->role === 'Admin')
                         <li><a href="{{ route('dashboard.admin') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-th-large mr-2"></i>Dashboard</a></li>
-                        <li><a href="{{ route('admin.tiket.list-tiket') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>Tiket</a></li>
+                        <li><a href="{{ route('admin.list-tiket') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>Tiket</a></li>
                         <li>
                           <a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center" onclick="toggleSubMenu('dropdownUser')">
                             <i class="fas fa-users mr-2"></i>Users
@@ -52,9 +93,9 @@
                         </li>
                         <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-chart-bar mr-2"></i>Reports</a></li>
                     @elseif (Auth::user()->role->role === 'Teknisi')
-                        <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-th-large mr-2"></i>Dashboard</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>List Tiket</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-sticky-note mr-2"></i>Catatan Tiket</a></li>
+                        <li><a href="{{ route('dashboard.teknisi') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-th-large mr-2"></i>Dashboard</a></li>
+                        <li><a href="{{ route('teknisi.list-tiket') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>List Tiket</a></li>
+                        <li><a href="{{ route('teknisi.list-note') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-sticky-note mr-2"></i>Catatan Tiket</a></li>
                     @elseif (Auth::user()->role->role === 'Karyawan')
                         <li><a href="{{ route('dashboard.karyawan') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-th-large mr-2"></i>Dashboard</a></li>
                         <li><a href="{{  route('karyawan.list-tiket') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>List Tiket</a></li>
@@ -190,6 +231,19 @@
         if (modal) {
             modal.classList.add('hidden');
         }
+    }
+  </script>
+
+  {{-- Script untuk dropdown Notifikasi --}}
+  <script>
+    function toggleDropdown(id) {
+      const dropdown = document.getElementById(id);
+      if(dropdown.classList.contains('hidden')) {
+        dropdown.classList.remove('hidden');
+      }
+      else {
+        dropdown.classList.add('hidden');
+      }
     }
   </script>
 

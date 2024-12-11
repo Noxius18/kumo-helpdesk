@@ -29,18 +29,21 @@ Route::get('/login', [LoginController::class, 'showLogin'])->name('auth.login');
 Route::post('/login', [LoginController::class, 'authLogin']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 
-// Ruute End-Point untuk Admin
+// Route Notifikasi
+Route::post('/notifikasi/baca', [DashboardController::class, 'bacaNotifikasi'])->name('notifikasi.baca');
+
+// Route End-Point untuk Admin
 Route::middleware(['auth', 'role:Admin'])->group(function() {
     // Dashboard
     Route::get('admin/dashboard', [DashboardController::class, 'dashboardAdmin'])->name('dashboard.admin');
 
     // Index User
-    Route::get('admin/data-admin', [UserController::class, 'indexAdmin'])->name('dashboard.admin.data-admin');
-    Route::get('admin/data-karyawan', [UserController::class, 'indexKaryawan'])->name('dashboard.admin.data-karyawan');
-    Route::get('admin/data-teknisi', [UserController::class, 'indexTeknisi'])->name('dashboard.admin.data-teknisi');
+    Route::get('admin/data-admin', [AdminController::class, 'indexAdmin'])->name('dashboard.admin.data-admin');
+    Route::get('admin/data-karyawan', [AdminController::class, 'indexKaryawan'])->name('dashboard.admin.data-karyawan');
+    Route::get('admin/data-teknisi', [AdminController::class, 'indexTeknisi'])->name('dashboard.admin.data-teknisi');
 
     // Index Admin untuk list Tiket
-    Route::get('admin/data-tiket', [AdminController::class, 'indexTiket'])->name('admin.tiket.list-tiket');
+    Route::get('admin/data-tiket', [AdminController::class, 'indexTiket'])->name('admin.list-tiket');
     Route::get('admin/data-tiket/{id}', [AdminController::class, 'detailTiket'])->name('admin.tiket.detail');
 
     // Resources untuk CRUD 
@@ -52,6 +55,23 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
     
 });
 
+// Teknisi
+Route::middleware(['auth', 'role:Teknisi'])->group(function() {
+    // Dashboard
+    Route::get('teknisi/dashboard', [DashboardController::class, 'dashboardTeknisi'])->name('dashboard.teknisi');
+
+    // Index Tiket
+    Route::get('teknisi/list-tiket', [TeknisiController::class, 'indexTiket'])->name('teknisi.list-tiket');
+    Route::get('teknisi/list-tiket/{id}', [TeknisiController::class, 'detailTiket'])->name('teknisi.tiket.detail');
+    Route::get('teknisi/list-note', [TeknisiController::class, 'listNote'])->name('teknisi.list-note');
+    
+    // Post End-Point
+    Route::post('teknisi/list-tiket/{id}', [TeknisiController::class, 'updateStatus'])->name('teknisi.tiket.update');
+    Route::post('teknisi/note/tambah', [TeknisiController::class, 'tambahNote'])->name('teknisi.note.tambah');
+
+});
+
+// Karyawan
 Route::middleware(['auth', 'role:Karyawan'])->group(function() {
     // Dashboard
     Route::get('karyawan/dashboard', [DashboardController::class, 'dashboardKaryawan'])->name('dashboard.karyawan');
