@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
+use App\Notifications\NotifikasiTiket;
 use App\Models\Kategori;
 use App\Models\Tiket;
 use App\Models\User;
@@ -88,6 +90,16 @@ class TiketController extends Controller
                     'nama_path' => $filePath
                 ]);
             }
+        }
+
+        // Logika untuk Notifikasi
+        $karyawan = Auth::user();
+        $admins = User::where('role_id', 'RL001')->get();
+
+        $message = $karyawan->nama . ' telah membuat tiket baru';
+
+        foreach($admins as $admin) {
+            $admin->notify(new NotifikasiTiket($message, $tiket));
         }
 
         return redirect()->route('karyawan.list-tiket')->with('success', 'Berhasil membuat tiket');
