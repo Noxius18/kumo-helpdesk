@@ -46,6 +46,9 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
     Route::get('admin/data-tiket', [AdminController::class, 'indexTiket'])->name('admin.list-tiket');
     Route::get('admin/data-tiket/{id}', [AdminController::class, 'detailTiket'])->name('admin.tiket.detail');
 
+    // Index Departemen
+    Route::get('admin/departemen', [AdminController::class, 'listDepartemen'])->name('admin.departemen');
+
     // Route untuk laporan tiker
     Route::get('admin/laporan', [AdminController::class, 'formTiket'])->name('admin.laporan');
 
@@ -56,6 +59,8 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
     // POST End-Point
     Route::post('admin/data-tiket/{id}/teruskan', [AdminController::class, 'teruskanTiket'])->name('admin.tiket.teruskan');
     Route::post('admin/laporan', [AdminController::class, 'printTiket'])->name('admin.laporan.cetak');
+    Route::post('admin/departemen', [AdminController::class, 'tambahDepartemen'])->name('admin.departemen.tambah');
+    Route::delete('admin/departemen/{id}', [AdminController::class,  'hapusDepartemen'])->name('admin.departemen.hapus');
 
 });
 

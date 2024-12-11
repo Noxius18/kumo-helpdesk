@@ -91,6 +91,7 @@
                             <li><a href="{{ route('dashboard.admin.data-teknisi') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-solid fa-chalkboard-user mr-2"></i>Teknisi</a></li>
                           </ul>
                         </li>
+                        <li><a href="{{ route('admin.departemen') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-solid fa-building mr-2"></i>Departemen</a></li>
                         <li><a href="{{ route('admin.laporan') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-chart-bar mr-2"></i>Laporan Tiket</a></li>
                     @elseif (Auth::user()->role->role === 'Teknisi')
                         <li><a href="{{ route('dashboard.teknisi') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-th-large mr-2"></i>Dashboard</a></li>
@@ -173,6 +174,7 @@
 
         deleteButtons.forEach(button => {
             button.addEventListener('click', function() {
+                event.preventDefault();
                 const form = this.closest('form');
 
                 Swal.fire({
