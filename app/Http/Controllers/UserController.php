@@ -100,6 +100,15 @@ class UserController extends Controller
                 'spesialis_id' => 'nullable',
                 'role_id' => 'required',
                 'departemen_id' => 'required',
+            ], [
+                'nama.required' => 'Nama wajib diisi',
+                'email.required' => 'Email wajib diisi',
+                'email.email' => 'Email tidak valid',
+                'email.unique' => 'Email sudah digunakan',
+                'password.required' => 'Password wajib diisi',
+                'password.min' => 'Password minimal 8 digit',
+                'password.confirmed' => 'Konfirmasi password tidak sesuai',
+                'role_id.required' => 'Role wajib diisi'
             ]);
 
             // Hashing Password
@@ -138,7 +147,7 @@ class UserController extends Controller
             }
         } catch (\Exception $e) {
             Log::error('Error saat menyimpan data', ['message' => $e->getMessage()]);
-            return redirect()->back()->with('error', 'Error saat menyimpan data');
+            return redirect()->back()->with('error', $e->getMessage());
         }
     } 
 
