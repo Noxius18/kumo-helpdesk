@@ -52,7 +52,6 @@ class DashboardController extends Controller
         
         $progressTickets = Tiket::where('teknisi_id', $teknisiId)->where('status', 'Progress')->count();
         $resolvedTickets = Tiket::where('teknisi_id', $teknisiId)->where('status', 'Resolved')->count();
-        $totalTickets = Tiket::where('teknisi_id', $teknisiId)->where('status', 'Closed')->count();
 
         $tickets = Tiket::where('teknisi_id', $teknisiId)->get();
 
@@ -62,7 +61,6 @@ class DashboardController extends Controller
             'title' => 'Dashboard Teknisi',
             'progressTiket' => $progressTickets,
             'resolvedTiket' => $resolvedTickets,
-            'totalTiket' => $totalTickets,
             'tickets' => $tickets,
             'nama' => $username
         ]);

@@ -5,7 +5,7 @@
     <h3 class="text-2xl font-semibold text-gray-700 mb-4">Tambah Pengguna Baru</h3>
 
     <!-- Form Tambah Pengguna -->
-    <form action="{{ route('admin.user.store') }}" method="POST" class="space-y-6">
+    <form id="user-form" action="{{ route('admin.user.store') }}" method="POST" class="space-y-6">
         @csrf
         <!-- Nama -->
         <div>

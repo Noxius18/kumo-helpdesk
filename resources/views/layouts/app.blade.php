@@ -166,6 +166,20 @@
           confirmButtonColor: '#DC3545'
         });
       @endif
+
+      @if($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: 'Validasi Gagal!',
+                html: `
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                `,
+                confirmButtonText: 'Oke',
+                confirmButtonColor: '#DC3545'
+            });
+      @endif
     })
   </script>
   <script>
