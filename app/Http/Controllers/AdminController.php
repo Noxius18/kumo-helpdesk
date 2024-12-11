@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\NotifikasiTiket;
 use Illuminate\Http\Request;
 
 use App\Models\Tiket;
@@ -66,7 +67,13 @@ class AdminController extends Controller
             'status' => 'Progress'
         ]);
 
-        return redirect()->route('admin.tiket.list-tiket')->with('success', 'Tiket berhasil diteruskan ke admin');
+        $teknisi = User::findOrFail($request->teknisi_id);
+
+        // Pesan Notifikasi
+        $message = $tiket->deskripsi;
+        $teknisi->notify(new NotifikasiTiket($message, $tiket));
+
+        return redirect()->route('admin.tiket.list-tiket')->with('success', 'Tiket berhasil diteruskan ke teknisi');
     }
     
     public function detailTiket($id) {

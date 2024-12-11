@@ -46,4 +46,40 @@ class DashboardController extends Controller
             'nama' => $username
         ]);
     }
+
+    public function dashboardTeknisi() {
+        $teknisiId = Auth::id();
+        
+        $progressTickets = Tiket::where('teknisi_id', $teknisiId)->where('status', 'Progress')->count();
+        $resolvedTickets = Tiket::where('teknisi_id', $teknisiId)->where('status', 'Resolved')->count();
+        $totalTickets = Tiket::where('teknisi_id', $teknisiId)->where('status', 'Closed')->count();
+
+        $tickets = Tiket::where('teknisi_id', $teknisiId)->get();
+
+        $username = Auth::user()->nama;
+
+        return view('dashboard.dashboard', [
+            'title' => 'Dashboard Teknisi',
+            'progressTiket' => $progressTickets,
+            'resolvedTiket' => $resolvedTickets,
+            'totalTiket' => $totalTickets,
+            'tickets' => $tickets,
+            'nama' => $username
+        ]);
+    }
+
+    public function bacaNotifikasi($id = null) {
+        
+        if($id) {
+            $notifikasi = Auth::user()->notifications()->find($id);
+            if($notifikasi){
+                $notifikasi->markAsRead();
+            }
+        }
+        else {
+            Auth::user()->unreadNotifications->markAsRead();
+        }
+
+        return back()->with('success', 'Notifikasi sudah dibaca');
+    }
 }
