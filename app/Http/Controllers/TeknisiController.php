@@ -94,9 +94,19 @@ class TeknisiController extends Controller
         return redirect()->route('teknisi.list-tiket')->with('success', 'Berhasil menambah catatan pada tiket');
     }
 
-    // public function lihatNote() {
-    //     $tiket = Tiket::with()
-    // }
+    public function listNote() {
+        $teknisi = Auth::user()->user_id;
+
+        $note = Note::with('tiket')
+            ->where('teknisi_id', $teknisi)
+            ->orderBy('tanggal', 'desc')
+            ->paginate(10);
+        
+        return view('v_tiket.note', [
+            'title' => 'List Note',
+            'notes' => $note
+        ]);
+    }
 
     public function bacaNotifikasi($notifikasiId) {
         $notifikasi = Auth::user()->notifications()->find($notifikasiId);

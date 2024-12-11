@@ -38,9 +38,9 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboardAdmin'])->name('dashboard.admin');
 
     // Index User
-    Route::get('admin/data-admin', [UserController::class, 'indexAdmin'])->name('dashboard.admin.data-admin');
-    Route::get('admin/data-karyawan', [UserController::class, 'indexKaryawan'])->name('dashboard.admin.data-karyawan');
-    Route::get('admin/data-teknisi', [UserController::class, 'indexTeknisi'])->name('dashboard.admin.data-teknisi');
+    Route::get('admin/data-admin', [AdminController::class, 'indexAdmin'])->name('dashboard.admin.data-admin');
+    Route::get('admin/data-karyawan', [AdminController::class, 'indexKaryawan'])->name('dashboard.admin.data-karyawan');
+    Route::get('admin/data-teknisi', [AdminController::class, 'indexTeknisi'])->name('dashboard.admin.data-teknisi');
 
     // Index Admin untuk list Tiket
     Route::get('admin/data-tiket', [AdminController::class, 'indexTiket'])->name('admin.list-tiket');
@@ -63,7 +63,8 @@ Route::middleware(['auth', 'role:Teknisi'])->group(function() {
     // Index Tiket
     Route::get('teknisi/list-tiket', [TeknisiController::class, 'indexTiket'])->name('teknisi.list-tiket');
     Route::get('teknisi/list-tiket/{id}', [TeknisiController::class, 'detailTiket'])->name('teknisi.tiket.detail');
-
+    Route::get('teknisi/list-note', [TeknisiController::class, 'listNote'])->name('teknisi.list-note');
+    
     // Post End-Point
     Route::post('teknisi/list-tiket/{id}', [TeknisiController::class, 'updateStatus'])->name('teknisi.tiket.update');
     Route::post('teknisi/note/tambah', [TeknisiController::class, 'tambahNote'])->name('teknisi.note.tambah');

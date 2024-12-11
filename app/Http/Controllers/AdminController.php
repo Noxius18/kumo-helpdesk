@@ -11,6 +11,49 @@ use App\Models\Kategori;
 
 class AdminController extends Controller
 {
+    public function indexAdmin()
+    {
+        $admin = User::with(['role', 'departemen'])
+            ->whereHas('role', function($query) {
+                $query->where('role', 'Admin');
+            })
+            ->orderByRaw("CAST(SUBSTRING(user_id, 2) AS UNSIGNED)")
+            ->get();
+
+        return view('v_user.index.admin', [
+            'title' => 'Daftar Admin',
+            'admin' => $admin
+        ]);
+    }
+
+    public function indexKaryawan() {
+        $karyawan = User::with(['role', 'departemen'])
+            ->whereHas('role', function($query) {
+                $query->where('role', 'Karyawan');
+            })
+            ->orderByRaw("CAST(SUBSTRING(user_id, 2) AS UNSIGNED)")
+            ->get();
+
+        return view('v_user.index.karyawan', [
+            'title' => 'Daftar Karyawan',
+            'karyawan' => $karyawan,
+        ]);
+    }
+
+    public function indexTeknisi() {
+        $teknisi = User::with(['role', 'spesialis', 'departemen'])
+            ->whereHas('role', function($query) {
+                $query->where('role', 'Teknisi');
+            })
+            ->orderByRaw("CAST(SUBSTRING(user_id, 2) AS UNSIGNED)")
+            ->get();
+
+        return view('v_user.index.teknisi', [
+            'title' => 'Daftar Teknisi',
+            'teknisi' => $teknisi,
+        ]);
+    }
+    
     public function indexTiket(Request $request) {
         // Ambil query dari search
         $cari = $request->input('search');
