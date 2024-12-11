@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($tickets as $tiket)
+                @forelse ($tikets as $tiket)
                     <tr class="hover:bg-gray-100">
                         <td class="px-6 py-4">{{ $tiket->tiket_id }}</td>
                         <td class="px-6 py-4">{{ $tiket->kategori->kategori }}</td>
@@ -47,5 +47,6 @@
                 @endforelse
             </tbody>
         </table>
+        @include('layouts.page')
     </div>
 </div>

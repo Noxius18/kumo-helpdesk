@@ -92,6 +92,7 @@
                 @endforelse
             </tbody>
         </table>
+        @include('layouts.page')
     </div>
 </div>
 
