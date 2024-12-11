@@ -29,6 +29,9 @@ Route::get('/login', [LoginController::class, 'showLogin'])->name('auth.login');
 Route::post('/login', [LoginController::class, 'authLogin']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 
+// Route Notifikasi
+Route::post('/notifikasi/baca', [DashboardController::class, 'bacaNotifikasi'])->name('notifikasi.baca');
+
 // Ruute End-Point untuk Admin
 Route::middleware(['auth', 'role:Admin'])->group(function() {
     // Dashboard
@@ -50,6 +53,11 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
     // POST End-Point
     Route::post('admin/data-tiket/{id}/teruskan', [AdminController::class, 'teruskanTiket'])->name('admin.tiket.teruskan');
     
+});
+
+Route::middleware(['auth', 'role:Teknisi'])->group(function() {
+    // Dashboard
+    Route::get('teknisi/dashboard', [DashboardController::class, 'dashboardTeknisi'])->name('dashboard.teknisi');
 });
 
 Route::middleware(['auth', 'role:Karyawan'])->group(function() {
