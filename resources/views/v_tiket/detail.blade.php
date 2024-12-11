@@ -72,33 +72,54 @@
         </div>
     @endif
 
-    <!-- Riwayat Catatan -->
     @if($tiket->note && $tiket->note->isNotEmpty())
         <div class="mt-6">
             <h4 class="text-sm font-medium text-gray-500">Riwayat Catatan</h4>
             <ul class="mt-2 space-y-4">
                 @foreach($tiket->note as $note)
                     <li class="bg-gray-50 p-4 rounded-lg shadow">
-                        <p class="text-sm text-gray-600">{{ \Carbon\Carbon::parse($note->created_at)->format('d M Y H:i') }}</p>
-                        <p class="mt-1 text-gray-800">{{ $note->deskripsi }}</p>
+                        <p class="text-sm text-gray-600">
+                            {{ \Carbon\Carbon::parse($note->tanggal)->format('d M Y H:i') }} oleh {{ $note->user->nama }}
+                        </p>
+                        <p class="mt-1 text-gray-800">{{ $note->note }}</p>
                     </li>
                 @endforeach
             </ul>
         </div>
     @endif
 
-    <!-- Tombol Kembali -->
-    <div class="mt-6 flex justify-end">
+    <!-- Riwayat Catatan -->
+    @if(Auth::user()->role->role === 'Teknisi')
+        <div class="mt-6">
+            <h4 class="text-sm font-medium text-gray-500">Tambah Catatan</h4>
+            <form action="{{ route('teknisi.note.tambah') }}" method="POST" class="mt-4">
+                @csrf
+                <input type="hidden" name="tiket_id" value="{{ $tiket->tiket_id }}">
+                <textarea name="note" rows="4" class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" placeholder="Masukkan catatan baru..." required></textarea>
+                <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Simpan Catatan</button>
+            </form>
+        </div>
+    @endif
+
+    <div class="mt-6 flex justify-end space-x-4">
         @if (Auth::check())
-            @if (Auth::user()->role->role === 'Admin')
-                <a href="{{ route('admin.list-tiket') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow">
-                    Kembali
-                </a>
-            @elseif (Auth::user()->role->role === 'Karyawan')
-                <a href="{{ route('karyawan.list-tiket') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow">
-                    Kembali
-                </a>
+            @if (Auth::user()->role->role === 'Teknisi' && $tiket->status === 'Progress')
+                <form action="{{ route('teknisi.tiket.update', $tiket->tiket_id) }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow">
+                        Selesaikan Tiket
+                    </button>
+                </form>
             @endif
+    
+            <a href="{{ 
+                Auth::user()->role->role === 'Admin' ? route('admin.list-tiket') : 
+                (Auth::user()->role->role === 'Teknisi' ? route('teknisi.list-tiket') : 
+                route('karyawan.list-tiket')) 
+            }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow">
+                Kembali
+            </a>
         @endif
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="bg-white shadow rounded-lg p-6">
     <!-- Judul Halaman -->
-    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Daftar Tiket Kamu</h3>
+    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Daftar Tiket yang kamu kerjakan</h3>
 
     <!-- Tabel Tiket -->
     <div class="overflow-x-auto">
@@ -34,7 +34,7 @@
                         </td>
                         <td class="px-6 py-4">{{ $tiket->tanggal_lapor->format('d-m-Y H:i') }}</td>
                         <td class="px-6 py-4">
-                            <a href="{{ route('karyawan.tiket.detail', $tiket->tiket_id) }}" 
+                            <a href="{{ route('teknisi.tiket.detail', $tiket->tiket_id) }}" 
                                class="text-blue-500 hover:underline">Detail</a>
                         </td>
                     </tr>
