@@ -1,6 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
 <div class="bg-white shadow rounded-lg p-6">
     <!-- Judul Halaman -->
     <h3 class="text-2xl font-semibold text-gray-700 mb-4">Daftar Tiket Kamu</h3>
@@ -52,4 +49,3 @@
         </table>
     </div>
 </div>
-@endsection

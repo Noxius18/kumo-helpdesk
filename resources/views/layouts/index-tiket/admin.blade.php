@@ -1,13 +1,10 @@
-@extends('layouts.app')
-
-@section('content')
 <div class="bg-white shadow rounded-lg p-6">
     <!-- Judul Halaman -->
     <h3 class="text-2xl font-semibold text-gray-700 mb-4">Daftar Semua Tiket</h3>
 
     <div class="flex justify-between items-center mb-4">
         <!-- Form Pencarian -->
-        <form action="{{ route('admin.tiket.list-tiket') }}" method="GET" class="flex space-x-2">
+        <form action="{{ route('admin.list-tiket') }}" method="GET" class="flex space-x-2">
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari tiket..." 
                    class="border rounded-md px-4 py-2 text-sm w-64 focus:ring focus:ring-blue-200" />
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">
@@ -16,7 +13,7 @@
         </form>
     
         <!-- Form Filter -->
-        <form action="{{ route('admin.tiket.list-tiket') }}" method="GET" class="flex space-x-2">
+        <form action="{{ route('admin.list-tiket') }}" method="GET" class="flex space-x-2">
             <select name="kategori" class="border rounded-md px-4 py-2 text-sm focus:ring focus:ring-blue-200">
                 <option value="">Semua Kategori</option>
                 @foreach ($kategoris as $kategori)
@@ -128,4 +125,3 @@
     </div>
     @endif
 @endforeach
-@endsection

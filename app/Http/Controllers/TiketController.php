@@ -27,7 +27,7 @@ class TiketController extends Controller
     public function create()
     {
         $kategori = Kategori::all();
-        return view('karyawan.tiket.create', [
+        return view('v_tiket.create', [
             'title' => 'Buat Tiket Baru',
             'kategori' => $kategori
         ]);
@@ -101,7 +101,7 @@ class TiketController extends Controller
     {
         $tiket = Tiket::with(['user', 'kategori', 'teknisi', 'foto', 'note'])->findOrFail($id);
         
-        return view('karyawan.tiket.detail', [
+        return view('v_tiket.detail', [
             'title' => 'Detail Tiket',
             'tiket' => $tiket,
         ]);

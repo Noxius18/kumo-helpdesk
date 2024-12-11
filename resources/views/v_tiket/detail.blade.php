@@ -89,9 +89,17 @@
 
     <!-- Tombol Kembali -->
     <div class="mt-6 flex justify-end">
-        <a href="{{ route('admin.tiket.list-tiket') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow">
-            Kembali
-        </a>
+        @if (Auth::check())
+            @if (Auth::user()->role->role === 'Admin')
+                <a href="{{ route('admin.list-tiket') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow">
+                    Kembali
+                </a>
+            @elseif (Auth::user()->role->role === 'Karyawan')
+                <a href="{{ route('karyawan.list-tiket') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow">
+                    Kembali
+                </a>
+            @endif
+        @endif
     </div>
 </div>
 @endsection

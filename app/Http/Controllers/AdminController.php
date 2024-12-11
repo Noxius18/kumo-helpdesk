@@ -48,7 +48,7 @@ class AdminController extends Controller
 
         $kategoris = Kategori::all();
 
-        return view('admin.tiket.index', [
+        return view('v_tiket.index', [
             'title' => 'Daftar Tiket',
             'teknisis' => $teknisi,
             'tikets' => $tiket,
@@ -73,13 +73,13 @@ class AdminController extends Controller
         $message = $tiket->deskripsi;
         $teknisi->notify(new NotifikasiTiket($message, $tiket));
 
-        return redirect()->route('admin.tiket.list-tiket')->with('success', 'Tiket berhasil diteruskan ke teknisi');
+        return redirect()->route('admin.list-tiket')->with('success', 'Tiket berhasil diteruskan ke teknisi');
     }
     
     public function detailTiket($id) {
         $tiket = Tiket::with(['user', 'kategori', 'teknisi', 'foto', 'note'])->findOrFail($id);
         
-        return view('admin.tiket.detail', [
+        return view('v_tiket.detail', [
             'title' => 'Detail Tiket',
             'tiket' => $tiket,
         ]);

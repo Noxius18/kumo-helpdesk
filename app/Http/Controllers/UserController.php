@@ -26,7 +26,7 @@ class UserController extends Controller
             ->orderByRaw("CAST(SUBSTRING(user_id, 2) AS UNSIGNED)")
             ->get();
 
-        return view('admin.user.index.admin', [
+        return view('v_user.index.admin', [
             'title' => 'Daftar Admin',
             'admin' => $admin
         ]);
@@ -40,7 +40,7 @@ class UserController extends Controller
             ->orderByRaw("CAST(SUBSTRING(user_id, 2) AS UNSIGNED)")
             ->get();
 
-        return view('admin.user.index.karyawan', [
+        return view('v_user.index.karyawan', [
             'title' => 'Daftar Karyawan',
             'karyawan' => $karyawan,
         ]);
@@ -54,7 +54,7 @@ class UserController extends Controller
             ->orderByRaw("CAST(SUBSTRING(user_id, 2) AS UNSIGNED)")
             ->get();
 
-        return view('admin.user.index.teknisi', [
+        return view('v_user.index.teknisi', [
             'title' => 'Daftar Teknisi',
             'teknisi' => $teknisi,
         ]);
@@ -69,7 +69,7 @@ class UserController extends Controller
         $departemen = Departemen::all();
         $spesialis = Spesialis::all();
 
-        return view('admin.user.create', [
+        return view('v_user.create', [
             'title' => 'Tambah User Baru', 
             'roles' => $roles,
             'departemen' => $departemen,
@@ -160,7 +160,7 @@ class UserController extends Controller
         $departemen = Departemen::all();
         $spesialis = Spesialis::all();
 
-        return view('admin.user.update', [
+        return view('v_user.update', [
             'title' => 'Edit User',
             'user' => $user,
             'roles' => $role,

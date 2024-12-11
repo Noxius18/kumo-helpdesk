@@ -78,7 +78,7 @@
                 @if (Auth::check())
                     @if (Auth::user()->role->role === 'Admin')
                         <li><a href="{{ route('dashboard.admin') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-th-large mr-2"></i>Dashboard</a></li>
-                        <li><a href="{{ route('admin.tiket.list-tiket') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>Tiket</a></li>
+                        <li><a href="{{ route('admin.list-tiket') }}" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center"><i class="fas fa-list mr-2"></i>Tiket</a></li>
                         <li>
                           <a href="#" class="block px-4 py-2 hover:bg-kumoBlue-300 rounded flex items-center" onclick="toggleSubMenu('dropdownUser')">
                             <i class="fas fa-users mr-2"></i>Users
