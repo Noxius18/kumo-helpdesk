@@ -12,11 +12,11 @@ class KaryawanController extends Controller
         $tickets = Tiket::with('kategori')
             ->where('user_id', auth()->user()->user_id)
             ->orderBy('tanggal_lapor', 'desc')
-            ->get();
+            ->paginate(10);
         
             return view('v_tiket.index', [
                 'title' => 'List Tiket',
-                'tickets' => $tickets
+                'tikets' => $tickets
             ]);
     }
 

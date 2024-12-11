@@ -17,11 +17,11 @@ class TeknisiController extends Controller
         $tiket = Tiket::with(['user', 'kategori'])
             ->where('teknisi_id', Auth::user()->user_id)
             ->orderBy('tanggal_lapor', 'desc')
-            ->get();
+            ->paginate(10);
         
             return view('v_tiket.index', [
                 'title' => 'Tiket yang kamu kerjakan',
-                'tickets' => $tiket
+                'tikets' => $tiket
             ]);
     }
 
@@ -51,7 +51,7 @@ class TeknisiController extends Controller
         $karyawan = User::find($tiket->user_id);
         $admins = User::where('role_id', 'RL001')->get();
 
-        $messageToKaryawan = 'Tiket "' . $tiket->tiket_id . '" telah selesai dikerjakan oleh' . $teknisi->nama;
+        $messageToKaryawan = 'Tiket "' . $tiket->tiket_id . '" telah selesai dikerjakan oleh ' . $teknisi->nama;
         $messageToAdmin = 'Tiket "' . $tiket->tiket_id . '" telah diselesaikan oleh ' . $teknisi->nama;
 
         // Notifikasi Tiket sudah selesai ke Karyawan dan Admin
