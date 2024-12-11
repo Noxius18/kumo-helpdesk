@@ -14,7 +14,7 @@ class KaryawanController extends Controller
             ->orderBy('tanggal_lapor', 'desc')
             ->get();
         
-            return view('karyawan.tiket.index', [
+            return view('v_tiket.index', [
                 'title' => 'List Tiket',
                 'tickets' => $tickets
             ]);
@@ -23,7 +23,7 @@ class KaryawanController extends Controller
     public function detailTiket($id) {
         $tiket = Tiket::with(['user', 'kategori', 'teknisi', 'foto', 'note'])->findOrFail($id);
         
-        return view('karyawan.tiket.detail', [
+        return view('v_tiket.detail', [
             'title' => 'Detail Tiket',
             'tiket' => $tiket,
         ]);

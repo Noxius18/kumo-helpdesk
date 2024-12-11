@@ -43,7 +43,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
     Route::get('admin/data-teknisi', [UserController::class, 'indexTeknisi'])->name('dashboard.admin.data-teknisi');
 
     // Index Admin untuk list Tiket
-    Route::get('admin/data-tiket', [AdminController::class, 'indexTiket'])->name('admin.tiket.list-tiket');
+    Route::get('admin/data-tiket', [AdminController::class, 'indexTiket'])->name('admin.list-tiket');
     Route::get('admin/data-tiket/{id}', [AdminController::class, 'detailTiket'])->name('admin.tiket.detail');
 
     // Resources untuk CRUD 

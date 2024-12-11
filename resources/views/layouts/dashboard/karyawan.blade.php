@@ -1,6 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
 <div class="bg-gray-100 min-h-screen p-6">
     <div class="container mx-auto">
         <!-- Header Dashboard -->
@@ -8,7 +5,7 @@
             <h1 class="text-3xl font-semibold text-gray-700">Dashboard Karyawan</h1>
             <p class="text-sm text-gray-500">Halo, {{ $nama }}!</p>
         </div>
-
+    
         <!-- Ringkasan Tiket -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <!-- Tiket yang Dibuka -->
@@ -16,24 +13,24 @@
                 <h3 class="text-lg font-semibold text-gray-700 mb-2">Tiket yang Dibuka</h3>
                 <p class="text-3xl font-bold text-blue-500">{{ $openTicket }}</p>
             </div>
-
+        
             <!-- Tiket yang Sedang Diproses -->
             <div class="bg-white shadow rounded-lg p-6">
                 <h3 class="text-lg font-semibold text-gray-700 mb-2">Tiket Sedang Diproses</h3>
                 <p class="text-3xl font-bold text-yellow-500">{{ $progressTicket }}</p>
             </div>
-
+        
             <!-- Tiket yang Selesai -->
             <div class="bg-white shadow rounded-lg p-6">
                 <h3 class="text-lg font-semibold text-gray-700 mb-2">Tiket Selesai</h3>
                 <p class="text-3xl font-bold text-green-500">{{ $resolvedTicket }}</p>
             </div>
         </div>
-
+    
         <!-- Daftar Tiket -->
         <div class="bg-white shadow rounded-lg p-6">
             <h2 class="text-xl font-semibold text-gray-700 mb-4">Daftar Tiket Saya</h2>
-
+        
             <!-- Jika Tiket Kosong -->
             @if ($tickets->isEmpty())
                 <p class="text-gray-500 text-center">Belum ada tiket yang dilaporkan.</p>
@@ -69,4 +66,3 @@
         </div>
     </div>
 </div>
-@endsection

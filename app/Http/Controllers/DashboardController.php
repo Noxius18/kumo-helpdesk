@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $openTiket = Tiket::where('status', 'Open')->count();
         $progresTiket = Tiket::where('status', 'Progress')->count();
         
-        return view('admin.dashboard', [
+        return view('dashboard.index', [
             'title' => 'Dashboard Admin',
             'totalUser' => $totalUser,
             'totalTiket' => $totalTiket,
@@ -37,7 +37,7 @@ class DashboardController extends Controller
 
         $username = Auth::user()->nama;
 
-        return view('karyawan.dashboard', [
+        return view('dashboard.index', [
             'title' => 'Dashboard Karyawan',
             'openTicket' => $openedTickets,
             'progressTicket' => $progressTickets,
@@ -58,7 +58,7 @@ class DashboardController extends Controller
 
         $username = Auth::user()->nama;
 
-        return view('dashboard.dashboard', [
+        return view('dashboard.index', [
             'title' => 'Dashboard Teknisi',
             'progressTiket' => $progressTickets,
             'resolvedTiket' => $resolvedTickets,
