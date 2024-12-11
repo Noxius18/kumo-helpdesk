@@ -39,7 +39,7 @@ class AdminController extends Controller
         }
 
 
-        $tiket = $tiketQuery->orderBy('tanggal_lapor', 'desc')->get();
+        $tiket = $tiketQuery->orderBy('tanggal_lapor', 'desc')->paginate(10);
 
         $teknisi = User::whereHas('role', function($query) {
             $query->where('role', 'Teknisi');
