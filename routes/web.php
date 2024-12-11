@@ -46,13 +46,17 @@ Route::middleware(['auth', 'role:Admin'])->group(function() {
     Route::get('admin/data-tiket', [AdminController::class, 'indexTiket'])->name('admin.list-tiket');
     Route::get('admin/data-tiket/{id}', [AdminController::class, 'detailTiket'])->name('admin.tiket.detail');
 
+    // Route untuk laporan tiker
+    Route::get('admin/laporan', [AdminController::class, 'formTiket'])->name('admin.laporan');
+
     // Resources untuk CRUD 
     Route::resource('admin/user', UserController::class, ['as' => 'admin']);
     Route::resource('admin/tiket', TiketController::class, ['as' => 'admin']);
     
     // POST End-Point
     Route::post('admin/data-tiket/{id}/teruskan', [AdminController::class, 'teruskanTiket'])->name('admin.tiket.teruskan');
-    
+    Route::post('admin/laporan', [AdminController::class, 'printTiket'])->name('admin.laporan.cetak');
+
 });
 
 // Teknisi

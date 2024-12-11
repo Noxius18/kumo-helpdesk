@@ -127,4 +127,26 @@ class AdminController extends Controller
             'tiket' => $tiket,
         ]);
     }
+
+    public function formTiket() {
+        return view('v_laporan.form', [
+            'title' => 'Laporan Tiket'
+        ]);
+    }
+    
+    public function printTiket(Request $request) {
+        $tanggalAwal = $request->tanggal_awal;
+        $tanggalAkhir = $request->tanggal_akhir;
+
+        $printTiket = Tiket::with(['user', 'teknisi', 'kategori'])
+            ->whereBetween('tanggal_lapor', [$tanggalAwal, $tanggalAkhir])
+            ->get();
+        
+        return view('v_laporan.print', [
+            'title' => 'Laporan Data Tiket',
+            'tanggalAwal' => $tanggalAwal,
+            'tanggalAkhir' => $tanggalAkhir,
+            'cetak' => $printTiket
+        ]);
+    }
 }
