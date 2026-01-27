@@ -53,7 +53,7 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a href="/teknisi/tiket/detail/TK123" class="text-blue-500 hover:underline">Detail</a>
+                                    <a href="{{ route('teknisi.tiket.detail', $ticket->tiket_id) }}" class="text-blue-500 hover:underline">Detail</a>
                                 </td>
                             </tr>
                         @endforeach
